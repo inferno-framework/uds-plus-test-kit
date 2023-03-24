@@ -6,4 +6,6 @@ gemspec
 
 group :development, :test do
   gem 'debug'
+  gem 'foreman'
+  gem 'rerun'
 end
