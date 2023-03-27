@@ -2,6 +2,8 @@
 - [Inferno documentation](https://inferno-framework.github.io/inferno-core/)
 - [Ruby API documentation](https://inferno-framework.github.io/inferno-core/docs)
 - [JSON API documentation](https://inferno-framework.github.io/inferno-core/api-docs)
+### Useful methods
+- [Route documentation](https://inferno-framework.github.io/inferno-core/docs/Inferno/DSL/Runnable.html#resume_test_route-instance_method)
 
 ## Important Links in the IG
 ### [How UDS+ Works](http://fhir.drajer.com/site/usecases.html#uds-data-submission-workflow-using-fhir) 

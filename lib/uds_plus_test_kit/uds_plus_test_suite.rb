@@ -1,6 +1,8 @@
 require 'inferno/dsl/oauth_credentials'
 require 'smart_app_launch_test_kit'
 require_relative './version'
+require_relative './receive_data'
+require_relative './validate_data'
 
 module UDSPlusTestKit
     class UDSPlusTestSuite < Inferno::TestSuite
@@ -24,17 +26,21 @@ module UDSPlusTestKit
 
         id :uds_plus
 
-        input :url,
-            title: 'FHIR Endpoint',
-            description: 'URL of the FHIR endpoint'
-        input :smart_credentials,
-            title: 'OAuth Credentials',
-            type: :oauth_credentials,
-            optional: true
+        test do
+            input :issuer
+            receives_request :submission
+            
+            run do
+                wait_for_request(issuer)
+            end
+        end
 
-        fhir_client do
-            url :url
-            oauth_credentials :smart_credentials
+        # Validator
+        test do
+            uses_request :submission
+            run do
+                puts request.resource.inspect
+            end
         end
 
         # Test Groups go here
