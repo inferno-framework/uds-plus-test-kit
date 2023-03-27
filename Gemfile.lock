@@ -251,6 +251,10 @@ GEM
       connection_pool (>= 2.2.5, < 3)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
+    smart_app_launch_test_kit (0.2.2)
+      inferno_core (>= 0.4.2)
+      jwt (~> 2.2)
+      tls_test_kit (~> 0.2.0)
     sqlite3 (1.5.4)
       mini_portile2 (~> 2.8.0)
     sqlite3 (1.5.4-arm64-darwin)
@@ -258,6 +262,8 @@ GEM
     sqlite3 (1.5.4-x86_64-linux)
     thor (1.2.1)
     tilt (2.0.11)
+    tls_test_kit (0.2.0)
+      inferno_core (>= 0.4.1)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -282,8 +288,10 @@ DEPENDENCIES
   factory_bot (~> 6.1)
   foreman
   inferno_template!
+  rack
   rerun
   rspec (~> 3.10)
+  smart_app_launch_test_kit (~> 0.2.2)
   webmock (~> 3.11)
 
 BUNDLED WITH

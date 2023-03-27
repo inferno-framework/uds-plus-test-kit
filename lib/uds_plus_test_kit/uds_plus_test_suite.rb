@@ -1,7 +1,9 @@
 require 'inferno/dsl/oauth_credentials'
+require 'smart_app_launch_test_kit'
+require_relative './version'
 
 module UDSPlusTestKit
-    class UDSPlusTestSuite < Inferno::UDSPlusTestSuite
+    class UDSPlusTestSuite < Inferno::TestSuite
         title 'UDS+ Test Kit'
         description %(
             The UDS+ Test Kit tests systems for their conformance to the [UDS+
