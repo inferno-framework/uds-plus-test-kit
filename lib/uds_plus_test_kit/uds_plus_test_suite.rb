@@ -19,9 +19,28 @@ module UDSPlusTestKit
                 Generator::GroupMetadata.new(raw_metadata)
             end
         end
+
+        # These inputs will be available to all tests in this suite
+        input :url, 
+            title: 'FHIR Server Base Url'
+
+        input :credentials,
+            title: 'OAuth Credentials',
+            type: :oauth_credentials,
+            optional: true
+
+        # All FHIR requests in this suite will use this FHIR client
+        fhir_client do
+            url :url
+            oauth_credentials :credentials
+        end
     
         validator do
             url ENV.fetch('V120_VALIDATOR_URL', 'http://validator_service:4567')
+        end
+
+        resume_test_route :get, '/submission' do |request|
+            request.query_parameters['id']
         end
 
         id :uds_plus
