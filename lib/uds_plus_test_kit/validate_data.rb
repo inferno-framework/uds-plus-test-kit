@@ -2,7 +2,8 @@ require_relative './version'
 
 module UDSPlusTestKit
     module ValidateData
-        ######### MOVE THIS TO WHERE TEST IS CALLED ##################
+        DAR_CODE_SYSTEM_URL = 'http://terminology.hl7.org/CodeSystem/data-absent-reason'.freeze
+        DAR_EXTENSION_URL = 'http://hl7.org/fhir/StructureDefinition/data-absent-reason'.freeze
         PROFILE = {
             'UDSPlusSexualOrientation' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-sexual-orientation-observation.html'.freeze,
             'UDSPlusImportManifest' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-import-manifest.html'.freeze,
@@ -15,8 +16,58 @@ module UDSPlusTestKit
             'UDSPlusDiagnosis' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-diagnosis.html'.freeze
         }.freeze
 
+        def perform_validation_test(resources)
+            skip_if resources.blank?, "No resources provided for this iteration of the validation test"
+
+            profile_version = VERSION
+            profile_type = get_profile_type(resources.first)
+
+            assert profile_type != "NO MATCH", "Resource does not claim to match the id of any of the provided profile types"
+            skip_if profile_type == "NO MATCH", "Resource does not match any profile types; skipping remainder of test"
+            
+            profile_url = PROFILE[profile_type]
+
+            profile_with_version = "#{profile_url}|#{profile_version}"
+            resources.each do |resource|
+                resource_is_valid?(resource: resource, profile_url: profile_with_version)
+                check_for_dar(resource)
+            end
+
+            errors_found = messages.any? { |message| message[:type] == 'error' }
+
+            assert !errors_found, "Resource of type #{profile_type} does not conform to the profile #{profile_with_version}"
+        end
+
+        def check_for_dar(resource)
+            unless scratch[:dar_code_found]
+                resource.each_element do |element, meta, _path|
+                    next unless element.is_a?(FHIR::Coding)
+
+                    check_for_dar_code(element)
+                end
+            end
+
+            unless scratch[:dar_extension_found]
+                check_for_dar_extension(resource)
+            end
+        end
+
+        def check_for_dar_code(coding)
+            return unless coding.code == 'unknown' && coding.system == DAR_CODE_SYSTEM_URL
+
+            scratch[:dar_code_found] = true
+            output dar_code_found: 'true'
+        end
+
+        def check_for_dar_extension(resource)
+            return unless resource.source_contents&.include? DAR_EXTENSION_URL
+
+            scratch[:dar_extension_found] = true
+            output dar_extension_found: 'true'
+        end
+
         def get_profile_type(cur_resource)
-            profile_type = "ERROR"
+            profile_type = "NO MATCH"
             if cur_resource.is_a? FHIR::Model::UDSPlusSexualOrientation
                 profile_type = 'UDSPlusSexualOrientation'
             elsif cur_resource.is_a? FHIR::Model::UDSPlusImportManifest
