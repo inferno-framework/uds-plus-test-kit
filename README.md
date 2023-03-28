@@ -2,8 +2,10 @@
 - [Inferno documentation](https://inferno-framework.github.io/inferno-core/)
 - [Ruby API documentation](https://inferno-framework.github.io/inferno-core/docs)
 - [JSON API documentation](https://inferno-framework.github.io/inferno-core/api-docs)
-### Useful methods
+### Useful Methods and Definitions
+- [Bundle definition](https://www.rubydoc.info/gems/fhir_client/3.0.2/FHIR/Bundle)
 - [Route documentation](https://inferno-framework.github.io/inferno-core/docs/Inferno/DSL/Runnable.html#resume_test_route-instance_method)
+- [Resource Profile Definitions](http://fhir.drajer.com/site/artifacts.html#structures-resource-profiles)
 
 ## Important Links in the IG
 ### [How UDS+ Works](http://fhir.drajer.com/site/usecases.html#uds-data-submission-workflow-using-fhir) 
