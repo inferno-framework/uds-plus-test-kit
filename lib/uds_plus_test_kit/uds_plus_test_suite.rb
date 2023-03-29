@@ -81,8 +81,6 @@ module UDSPlusTestKit
                         Import attempt failed. 
                         Response status = #{request.status}"
                     )
-                    assert request.resource.present?, 
-                        'No recource received from import.'
                 end
             end
                         
@@ -100,6 +98,13 @@ module UDSPlusTestKit
                 uses_request :submission
                 run do
                     resource = request.resource
+
+                    assert resource.present?, 
+                        'No recource received from import.'
+                    skip_if !resource.present?, %(
+                        Import recieved does not contain a valid resource. 
+                        Skipping remainder of test."
+                    )
                     
                     assert resource.is_a?(FHIR::Model)
                     skip_if !resource.is_a?(FHIR::Model), %(
