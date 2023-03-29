@@ -16,15 +16,12 @@ module UDSPlusTestKit
             'UDSPlusDiagnosis' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-diagnosis.html'.freeze
         }.freeze
 
-        def perform_validation_test(resources)
+        def perform_validation_test(profile_type, resources)
             skip_if resources.blank?, "No resources provided for this iteration of the validation test"
-
-            profile_version = VERSION
-            profile_type = get_profile_type(resources.first)
-
             assert profile_type != "NO MATCH", "Resource does not claim to match the id of any of the provided profile types"
             skip_if profile_type == "NO MATCH", "Resource does not match any profile types; skipping remainder of test"
-            
+
+            profile_version = VERSION
             profile_url = PROFILE[profile_type]
 
             profile_with_version = "#{profile_url}|#{profile_version}"

@@ -60,6 +60,10 @@ module UDSPlusTestKit
                         message: "Waiting to receive request."
                     )
 
+                    assert request.status == "200", %(
+                        Import attempt failed. 
+                        Response status = #{request.status}"
+                    )
                     assert request.resource.present?, 
                         'No recource received from import.'
                 end
@@ -70,7 +74,34 @@ module UDSPlusTestKit
                 uses_request :submission
                 run do
                     resource = request.resource
-                    assert
+                    
+                    assert resource.is_a?(FHIR::Model)
+                    skip_if !resource.is_a?(FHIR::Model), %(
+                        Import recieved does not match FHIR conventions. 
+                        Skipping remainder of test
+                    )
+
+                    perform_validation_test('UDSPlusImportManifest', [resource])
+
+                    #Iterate through the types provided by the resource (pseudocode for now)
+                    #TODO: change list_of_types to whatever the import manifest calls it
+                    
+                    resource.list_of_types.each do |type, link|
+                        profile_type = get_profile_type(type)
+                        
+                        #TODO: Figure out how to retrieve info from the url
+                        profile_resource = read_url(link)
+                        assert profile_resource.list_of_instances.present?,
+                            "Manifest does not provide valid instances of #{profile_type}"
+                        
+                        resources = []
+                        #TODO: change list_of_instances to whatever the import manifest calls it
+                        profile_resources.list_of_instances.each do |instance|
+                            resources << instance
+                        end
+
+                        perform_validation_test(profile_type, resources)
+                    end
                 end
             end
         end
