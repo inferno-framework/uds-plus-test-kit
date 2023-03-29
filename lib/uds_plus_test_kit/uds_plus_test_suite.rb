@@ -1,7 +1,6 @@
 require 'inferno/dsl/oauth_credentials'
 require 'smart_app_launch_test_kit'
 require_relative './version'
-require_relative './receive_data'
 require_relative './validate_data'
 
 module UDSPlusTestKit
