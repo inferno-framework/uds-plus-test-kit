@@ -40,28 +40,40 @@ module UDSPlusTestKit
         end
 
         resume_test_route :get, '/submission' do |request|
-            request.query_parameters['id']
+            request.resource
         end
+
+        config options: {
+            submission_uri: "#{Inferno::Application['base_url']}/custom/uds/submission"
+        }
 
         id :uds_plus
 
-        test do
-            input :issuer
-            receives_request :submission
-            
-            run do
-                wait_for_request(issuer)
+        group do
+            # Receiver
+            test do
+                input :issuer
+                receives_request :submission
+                
+                run do
+                    wait(
+                        identifier: issuer, 
+                        message: "Waiting to receive request."
+                    )
+
+                    assert request.resource.present?, 
+                        'No recource received from import.'
+                end
+            end
+                        
+            # Validator
+            test do
+                uses_request :submission
+                run do
+                    resource = request.resource
+                    assert
+                end
             end
         end
-
-        # Validator
-        test do
-            uses_request :submission
-            run do
-                puts request.resource.inspect
-            end
-        end
-
-        # Test Groups go here
     end
 end
