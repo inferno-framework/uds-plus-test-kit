@@ -49,9 +49,26 @@ module UDSPlusTestKit
         id :uds_plus
 
         group do
+            title 'UDS+ Submission Tests'
+            id :uds_plus_submitter_group
+            description %(
+                The included tests function as a rudimentary Data receiver.
+                This receiver will retrieve the import sent by the given 
+                Health Center Submitter, confirm a secure connection, and
+                validate whether the import's contents adhere to the UDS+ 
+                configuration.
+            )
+
+            run_as_group
+
             # Receiver
             test do
-                input :issuer
+                id :uds_plus_receiver_test
+                title 'Data Receiver waits for, then receives a UDS+ import'
+
+                input :issuer,
+                    title: 'Data Submitter Endpoint',
+                    description: 'The url the receiver looks to for the input manifest'
                 receives_request :submission
                 
                 run do
@@ -71,6 +88,15 @@ module UDSPlusTestKit
                         
             # Validator
             test do
+                id :uds_plus_validate_test
+                title 'Validate the contents of the import manifest'
+                description %(
+                    Test validates that the import manifest adheres to
+                    the UDS+ configuration. Test then parses through the
+                    data the manifest points to, validating the contents
+                    individually.
+                )
+
                 uses_request :submission
                 run do
                     resource = request.resource
