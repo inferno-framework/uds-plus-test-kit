@@ -13,40 +13,9 @@ module UDSPlusTestKit
 
         version VERSION
 
-        def self.metadata
-            @metadata ||= YAML.load_file(File.join(__dir__, 'metadata.yml'), aliases: true)[:groups].map do |raw_metadata|
-                Generator::GroupMetadata.new(raw_metadata)
-            end
-        end
-
-        # These inputs will be available to all tests in this suite
-        input :url, 
-            title: 'FHIR Server Base Url'
-
-        input :credentials,
-            title: 'OAuth Credentials',
-            type: :oauth_credentials,
-            optional: true
-
-        # All FHIR requests in this suite will use this FHIR client
-        fhir_client do
-            url :url
-            oauth_credentials :credentials
-        end
-    
         validator do
             url ENV.fetch('V120_VALIDATOR_URL', 'http://validator_service:4567')
         end
-
-#        resume_test_route :get, '/submission' do |request|
-#            puts "################## MADE IT ####################"
-#            puts request.resource
-#            request.resource
-#        end
-
-        config options: {
-            submission_uri: "#{Inferno::Application['base_url']}/custom/uds/submission"
-        }
 
         id :uds_plus
 
@@ -60,11 +29,8 @@ module UDSPlusTestKit
                 validate whether the import's contents adhere to the UDS+ 
                 configuration.
             )
-            http_client do
-                url 'https://hrsafhirdev.blob.core.windows.net'
-            end
 
-            run_as_group
+            #run_as_group
 
             # Receiver
             test do
@@ -84,20 +50,34 @@ module UDSPlusTestKit
                 
                 # Manifest Test
                 run do
-                    #wait(
-                    #    identifier: issuer, 
-                    #    message: "Waiting to receive request."
-                    #)
-
-                    puts "###################HERE#############"
-                    puts issuer
-
-                    get :issuer, name: :submission
-
-                    puts submission
+                    get issuer, name: :submission
 
                     assert_response_status(200)
+                    assert_valid_json(request.response_body)
+                    #import_manifest = FHIR.from_contents(request.response_body)
 
+                    valid_body = JSON.parse(response[:body])
+                    valid_body["resourceType"] = "Parameters"
+                    resource = FHIR::Json.from_json(JSON.generate(valid_body))
+                    
+                    puts ""
+                    puts valid_body.inspect
+                    puts ""
+
+                    skip "Remainder skipped"
+                    puts ""
+                    puts valid_body.class
+                    puts ""
+
+                    puts ""
+                    puts JSON.parse(response[:body]).class
+                    puts ""
+                    puts resource
+                    puts ""
+
+                    #FHIR.from_contents(response[:body])
+
+                    skip "Remainder skipped"
                     resource = request.resource
 
                     assert resource.present?, 
