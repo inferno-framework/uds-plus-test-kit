@@ -38,9 +38,11 @@ module UDSPlusTestKit
             url ENV.fetch('V120_VALIDATOR_URL', 'http://validator_service:4567')
         end
 
-        resume_test_route :get, '/submission' do |request|
-            request.resource
-        end
+#        resume_test_route :get, '/submission' do |request|
+#            puts "################## MADE IT ####################"
+#            puts request.resource
+#            request.resource
+#        end
 
         config options: {
             submission_uri: "#{Inferno::Application['base_url']}/custom/uds/submission"
@@ -58,45 +60,44 @@ module UDSPlusTestKit
                 validate whether the import's contents adhere to the UDS+ 
                 configuration.
             )
+            http_client do
+                url 'https://hrsafhirdev.blob.core.windows.net'
+            end
 
             run_as_group
 
             # Receiver
             test do
                 id :uds_plus_receiver_test
-                title 'Data Receiver waits for, then receives a UDS+ import'
+                title 'Receive a UDS+ Import Manifest'
+                description %(
+                    Test takes an import location provided by the user. 
+                    It attempts to GET the data stored at the given location,
+                    then validates whether the data claims to be an Import 
+                    Manifest, and that it adheres to UDS+ Manifest guidelines.
+                )
 
                 input :issuer,
                     title: 'Data Submitter Endpoint',
                     description: 'The url the receiver looks to for the input manifest'
-                receives_request :submission
+                makes_request :submission
                 
+                # Manifest Test
                 run do
-                    wait(
-                        identifier: issuer, 
-                        message: "Waiting to receive request."
-                    )
+                    #wait(
+                    #    identifier: issuer, 
+                    #    message: "Waiting to receive request."
+                    #)
 
-                    assert request.status == "200", %(
-                        Import attempt failed. 
-                        Response status = #{request.status}"
-                    )
-                end
-            end
-                        
-            # Validator
-            test do
-                id :uds_plus_validate_test
-                title 'Validate the contents of the import manifest'
-                description %(
-                    Test validates that the import manifest adheres to
-                    the UDS+ configuration. Test then parses through the
-                    data the manifest points to, validating the contents
-                    individually.
-                )
+                    puts "###################HERE#############"
+                    puts issuer
 
-                uses_request :submission
-                run do
+                    get :issuer, name: :submission
+
+                    puts submission
+
+                    assert_response_status(200)
+
                     resource = request.resource
 
                     assert resource.present?, 
@@ -113,21 +114,41 @@ module UDSPlusTestKit
                     )
 
                     perform_validation_test('UDSPlusImportManifest', [resource])
+                end
+            end
+                        
+            # Validator
+            test do
+                id :uds_plus_validate_test
+                title 'Validate the contents of the import manifest'
+                description %(
+                    Test iterates through the data that the Import Manifest 
+                    links to. It validates wheter data is found at the given points,
+                    and that said data adheres to UDS+ guidelines as provided for
+                    its claimed data type
+                )
+
+                uses_request :submission
+                run do
+                    resource = submission.resource
 
                     #Iterate through the types provided by the resource (pseudocode for now)
-                    #TODO: change list_of_types to whatever the import manifest calls it
-                    
-                    resource.list_of_types.each do |type, link|
-                        profile_type = get_profile_type(type)
+                    #TODO: change list_of_types to whatever the import manifest calls it     
+                    resource['input'].each do |source|
+                        profile_type = get_profile_type(source['type'])
                         
                         #TODO: Figure out how to retrieve info from the url
-                        profile_resource = read_url(link)
+                        get source['url']
+                        assert_response_status(200)
+                        profile_resource = request.resource
+                        
                         assert profile_resource.list_of_instances.present?,
                             "Manifest does not provide valid instances of #{profile_type}"
                         
+                        assert profile_resource.is_a?(FHIR::Model)
                         resources = []
                         #TODO: change list_of_instances to whatever the import manifest calls it
-                        profile_resources.list_of_instances.each do |instance|
+                        profile_resource.each do |instance|
                             resources << instance
                         end
 
