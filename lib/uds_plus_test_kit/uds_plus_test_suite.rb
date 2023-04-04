@@ -59,26 +59,6 @@ module UDSPlusTestKit
                     valid_body = JSON.parse(response[:body])
                     valid_body["resourceType"] = "Parameters"
                     resource = FHIR::Json.from_json(JSON.generate(valid_body))
-                    
-                    puts ""
-                    puts valid_body.inspect
-                    puts ""
-
-                    skip "Remainder skipped"
-                    puts ""
-                    puts valid_body.class
-                    puts ""
-
-                    puts ""
-                    puts JSON.parse(response[:body]).class
-                    puts ""
-                    puts resource
-                    puts ""
-
-                    #FHIR.from_contents(response[:body])
-
-                    skip "Remainder skipped"
-                    resource = request.resource
 
                     assert resource.present?, 
                         'No recource received from import.'
@@ -93,7 +73,8 @@ module UDSPlusTestKit
                         Skipping remainder of test
                     )
 
-                    perform_validation_test('UDSPlusImportManifest', [resource])
+                    resource_is_valid?(resource: resource, profile_url: 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-import-manifest.html')
+                    #perform_validation_test('UDSPlusImportManifest', [resource])
                 end
             end
                         
