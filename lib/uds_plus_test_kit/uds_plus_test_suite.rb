@@ -14,8 +14,10 @@ module UDSPlusTestKit
         version VERSION
 
         validator do
-            url ENV.fetch('V120_VALIDATOR_URL', 'http://validator_service:4567')
+            url ENV.fetch('VALIDATOR_URL', 'http://validator_service:4567')
         end
+
+
 
         id :uds_plus
 
@@ -73,7 +75,9 @@ module UDSPlusTestKit
                         Skipping remainder of test
                     )
 
-                    resource_is_valid?(resource: resource, profile_url: 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-import-manifest.html')
+                    #resource_is_valid?(resource: resource)
+                    assert_valid_resource(resource: resource, profile_url: 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-import-manifest')                    
+                    #assert_valid_resource(resource: resource, profile_url: 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-import-manifest')
                     #perform_validation_test('UDSPlusImportManifest', [resource])
                 end
             end
