@@ -17,7 +17,17 @@ module UDSPlusTestKit
             url ENV.fetch('VALIDATOR_URL', 'http://validator_service:4567')
         end
 
-
+        PROFILE = {
+            'SexualOrientation' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-sexual-orientation-observation.html'.freeze,
+            'ImportManifest' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-import-manifest.html'.freeze,
+            'Income' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-income-observation.html'.freeze,
+            'DeIdentifyData' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-deidentify-data.html'.freeze,
+            'Procedure' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-procedure.html'.freeze,
+            'Patient' => 'http://fhir.drajer.com/site/StructureDefinition-de-identified-uds-plus-patient.html'.freeze,
+            'Encounter' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-encounter.html'.freeze,
+            'Coverage' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-coverage.html'.freeze,
+            'Diagnosis' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-diagnosis.html'.freeze
+        }.freeze
 
         id :uds_plus
 
@@ -32,7 +42,7 @@ module UDSPlusTestKit
                 configuration.
             )
 
-            #run_as_group
+            run_as_group
 
             # Receiver
             test do
@@ -45,19 +55,21 @@ module UDSPlusTestKit
                     Manifest, and that it adheres to UDS+ Manifest guidelines.
                 )
 
-                input :issuer,
+                input :import_location,
                     title: 'Data Submitter Endpoint',
                     description: 'The url the receiver looks to for the input manifest'
                 makes_request :submission
                 
                 # Manifest Test
                 run do
-                    get issuer, name: :submission
+                    assert_valid_http_uri(import_location, "Import manifest uri location is not a valid http uri.")
+                    get import_location, name: :submission
 
                     assert_response_status(200)
                     assert_valid_json(request.response_body)
                     #import_manifest = FHIR.from_contents(request.response_body)
-
+                    
+                    ### TODO: DELETE THIS once we get a valid example test case
                     valid_body = JSON.parse(response[:body])
                     valid_body["resourceType"] = "Parameters"
                     resource = FHIR::Json.from_json(JSON.generate(valid_body))
@@ -95,16 +107,40 @@ module UDSPlusTestKit
 
                 uses_request :submission
                 run do
-                    resource = submission.resource
+                    #resource = submission.resource
+                    manifest = JSON.parse(request.response_body)
+                    manifest_content = manifest['input']
+                    #skip "reached checkpoint"
 
                     #Iterate through the types provided by the resource (pseudocode for now)
                     #TODO: change list_of_types to whatever the import manifest calls it     
-                    resource['input'].each do |source|
-                        profile_type = get_profile_type(source['type'])
+                    manifest_content.each do |source|
+                        puts ""
+                        puts source['type']
+                        puts ""
+
+                        valid_profile = PROFILE.keys.include?(source['type'])
+                        profile_definition = "NO TYPE"
+                        assert valid_profile, %(
+                            Manifest defines contents as type #{source['type']},
+                            which is not a defined UDS+ Profile type.
+                        )
+
+                        if valid_profile
+                            profile_definition = PROFILE[source['type']]
+                        else
+                            next
+                        end 
+
+                        invalid_uri_message = "Invalid URL provided for type #{source['type']}"
+                        assert_valid_http_uri(source['url'], invalid_uri_message)
                         
                         #TODO: Figure out how to retrieve info from the url
                         get source['url']
                         assert_response_status(200)
+
+                        next
+
                         profile_resource = request.resource
                         
                         assert profile_resource.list_of_instances.present?,

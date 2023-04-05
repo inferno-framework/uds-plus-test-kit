@@ -4,7 +4,20 @@ module UDSPlusTestKit
     module ValidateData
         DAR_CODE_SYSTEM_URL = 'http://terminology.hl7.org/CodeSystem/data-absent-reason'.freeze
         DAR_EXTENSION_URL = 'http://hl7.org/fhir/StructureDefinition/data-absent-reason'.freeze
+
         PROFILE = {
+            'SexualOrientation' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-sexual-orientation-observation.html'.freeze,
+            'ImportManifest' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-import-manifest.html'.freeze,
+            'Income' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-income-observation.html'.freeze,
+            'DeIdentifyData' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-deidentify-data.html'.freeze,
+            'Procedure' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-procedure.html'.freeze,
+            'Patient' => 'http://fhir.drajer.com/site/StructureDefinition-de-identified-uds-plus-patient.html'.freeze,
+            'Encounter' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-encounter.html'.freeze,
+            'Coverage' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-coverage.html'.freeze,
+            'Diagnosis' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-diagnosis.html'.freeze
+        }.freeze
+
+        PROFILE_FULL_NAME = {
             'UDSPlusSexualOrientation' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-sexual-orientation-observation.html'.freeze,
             'UDSPlusImportManifest' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-import-manifest.html'.freeze,
             'UDSPlusIncome' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-income-observation.html'.freeze,
