@@ -18,15 +18,15 @@ module UDSPlusTestKit
         end
 
         PROFILE = {
-            'SexualOrientation' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-sexual-orientation-observation.html'.freeze,
-            'ImportManifest' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-import-manifest.html'.freeze,
-            'Income' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-income-observation.html'.freeze,
-            'DeIdentifyData' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-deidentify-data.html'.freeze,
-            'Procedure' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-procedure.html'.freeze,
-            'Patient' => 'http://fhir.drajer.com/site/StructureDefinition-de-identified-uds-plus-patient.html'.freeze,
-            'Encounter' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-encounter.html'.freeze,
-            'Coverage' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-coverage.html'.freeze,
-            'Diagnosis' => 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-diagnosis.html'.freeze
+            'SexualOrientation' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-sexual-orientation-observation'.freeze,
+            'ImportManifest' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-import-manifest'.freeze,
+            'Income' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-income-observation'.freeze,
+            'DeIdentifyData' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-deidentify-data'.freeze,
+            'Procedure' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-procedure'.freeze,
+            'Patient' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/de-identified-uds-plus-patient'.freeze,
+            'Encounter' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-encounter'.freeze,
+            'Coverage' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-coverage'.freeze,
+            'Diagnosis' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-diagnosis'.freeze
         }.freeze
 
         id :uds_plus
@@ -89,7 +89,7 @@ module UDSPlusTestKit
 
                     #resource_is_valid?(resource: resource)
                     assert_valid_resource(resource: resource, profile_url: 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-import-manifest')                    
-                    #assert_valid_resource(resource: resource, profile_url: 'http://fhir.drajer.com/site/StructureDefinition-uds-plus-import-manifest')
+                    #assert_valid_resource(resource: resource, profile_url: 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-import-manifest')
                     #perform_validation_test('UDSPlusImportManifest', [resource])
                 end
             end
@@ -139,9 +139,32 @@ module UDSPlusTestKit
                         get source['url']
                         assert_response_status(200)
 
+                        #profile_resources = []
+                        request.response_body.gsub("}{", "}SPLIT HERE{").split("SPLIT HERE").each do |json_body|
+                            puts ""
+                            puts json_body.class
+                            puts json_body
+                            puts""
+
+                            assert_valid_json(json_body)
+
+                            resource = FHIR::Json.from_json(json_body)
+                            assert_valid_resource(resource: resource, profile_url: profile_definition)
+                            next
+
+                            single_resource = JSON.parse(json_body)
+                            assert_valid_json(single_resource)
+                            profile_resources << single_resource
+                        end
+
                         next
 
-                        profile_resource = request.resource
+                        puts ""
+                        puts "number of inputs:"
+                        puts profile_resources.length()
+                        puts ""
+
+                        next
                         
                         assert profile_resource.list_of_instances.present?,
                             "Manifest does not provide valid instances of #{profile_type}"
