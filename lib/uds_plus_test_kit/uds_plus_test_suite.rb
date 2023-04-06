@@ -115,10 +115,6 @@ module UDSPlusTestKit
                     #Iterate through the types provided by the resource (pseudocode for now)
                     #TODO: change list_of_types to whatever the import manifest calls it     
                     manifest_content.each do |source|
-                        puts ""
-                        puts source['type']
-                        puts ""
-
                         valid_profile = PROFILE.keys.include?(source['type'])
                         profile_definition = "NO TYPE"
                         assert valid_profile, %(
@@ -141,42 +137,11 @@ module UDSPlusTestKit
 
                         #profile_resources = []
                         request.response_body.gsub("}{", "}SPLIT HERE{").split("SPLIT HERE").each do |json_body|
-                            puts ""
-                            puts json_body.class
-                            puts json_body
-                            puts""
-
                             assert_valid_json(json_body)
 
                             resource = FHIR::Json.from_json(json_body)
                             assert_valid_resource(resource: resource, profile_url: profile_definition)
-                            next
-
-                            single_resource = JSON.parse(json_body)
-                            assert_valid_json(single_resource)
-                            profile_resources << single_resource
                         end
-
-                        next
-
-                        puts ""
-                        puts "number of inputs:"
-                        puts profile_resources.length()
-                        puts ""
-
-                        next
-                        
-                        assert profile_resource.list_of_instances.present?,
-                            "Manifest does not provide valid instances of #{profile_type}"
-                        
-                        assert profile_resource.is_a?(FHIR::Model)
-                        resources = []
-                        #TODO: change list_of_instances to whatever the import manifest calls it
-                        profile_resource.each do |instance|
-                            resources << instance
-                        end
-
-                        perform_validation_test(profile_type, resources)
                     end
                 end
             end
