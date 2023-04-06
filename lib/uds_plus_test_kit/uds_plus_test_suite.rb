@@ -67,12 +67,6 @@ module UDSPlusTestKit
 
                     assert_response_status(200)
                     assert_valid_json(request.response_body)
-                    #import_manifest = FHIR.from_contents(request.response_body)
-                    
-                    ### TODO: DELETE THIS once we get a valid example test case
-                    valid_body = JSON.parse(response[:body])
-                    valid_body["resourceType"] = "Parameters"
-                    resource = FHIR::Json.from_json(JSON.generate(valid_body))
 
                     assert resource.present?, 
                         'No recource received from import.'
@@ -87,10 +81,7 @@ module UDSPlusTestKit
                         Skipping remainder of test
                     )
 
-                    #resource_is_valid?(resource: resource)
                     assert_valid_resource(resource: resource, profile_url: 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-import-manifest')                    
-                    #assert_valid_resource(resource: resource, profile_url: 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-import-manifest')
-                    #perform_validation_test('UDSPlusImportManifest', [resource])
                 end
             end
                         
@@ -109,30 +100,42 @@ module UDSPlusTestKit
                 run do
                     #resource = submission.resource
                     manifest = JSON.parse(request.response_body)
-                    manifest_content = manifest['input']
-                    #skip "reached checkpoint"
+                    manifest_content = manifest['parameter']
 
                     #Iterate through the types provided by the resource (pseudocode for now)
                     #TODO: change list_of_types to whatever the import manifest calls it     
                     manifest_content.each do |source|
-                        valid_profile = PROFILE.keys.include?(source['type'])
+                        #Iterate through manifest until udsData is found
+                        next if source['name'] != 'udsData'
+
+                        profile_name = "NO NAME"
+                        profile_url = "NO URL"
+                        source['part'].each do |container|
+                            case container['name']
+                            when 'type'
+                                profile_name = container['valueCode']
+                            when 'url'
+                                profile_url = container['valueUrl']
+                            end
+                        end
+
+                        assert profile_name != "NO NAME" && profile_url != "NO URL", %(
+                            Input Manifest is not configured such that resource type and url
+                            for a given input is conventionally accessable.
+                        )
+
+                        valid_profile = PROFILE.keys.include?(profile_name)
                         profile_definition = "NO TYPE"
                         assert valid_profile, %(
-                            Manifest defines contents as type #{source['type']},
+                            Manifest defines contents as type #{profile_name},
                             which is not a defined UDS+ Profile type.
                         )
 
-                        if valid_profile
-                            profile_definition = PROFILE[source['type']]
-                        else
-                            next
-                        end 
-
-                        invalid_uri_message = "Invalid URL provided for type #{source['type']}"
-                        assert_valid_http_uri(source['url'], invalid_uri_message)
+                        invalid_uri_message = "Invalid URL provided for type #{profile_name}"
+                        assert_valid_http_uri(profile_url, invalid_uri_message)
                         
                         #TODO: Figure out how to retrieve info from the url
-                        get source['url']
+                        get profile_url
                         assert_response_status(200)
 
                         #profile_resources = []
@@ -145,6 +148,39 @@ module UDSPlusTestKit
                     end
                 end
             end
+        end
+    end
+end
+
+
+def micky_test
+    manifest_content.each do |source|
+        valid_profile = PROFILE.keys.include?(source['type'])
+        profile_definition = "NO TYPE"
+        assert valid_profile, %(
+            Manifest defines contents as type #{source['type']},
+            which is not a defined UDS+ Profile type.
+        )
+
+        if valid_profile
+            profile_definition = PROFILE[source['type']]
+        else
+            next
+        end 
+
+        invalid_uri_message = "Invalid URL provided for type #{source['type']}"
+        assert_valid_http_uri(source['url'], invalid_uri_message)
+        
+        #TODO: Figure out how to retrieve info from the url
+        get source['url']
+        assert_response_status(200)
+
+        #profile_resources = []
+        request.response_body.gsub("}{", "}SPLIT HERE{").split("SPLIT HERE").each do |json_body|
+            assert_valid_json(json_body)
+
+            resource = FHIR::Json.from_json(json_body)
+            assert_valid_resource(resource: resource, profile_url: profile_definition)
         end
     end
 end
