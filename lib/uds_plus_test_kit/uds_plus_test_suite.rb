@@ -121,7 +121,7 @@ module UDSPlusTestKit
 
                         assert profile_name != "NO NAME" && profile_url != "NO URL", %(
                             Input Manifest is not configured such that resource type and url
-                            for a given input is conventionally accessable.
+                            for a given input is conventionally accessible.
                         )
 
                         valid_profile = PROFILE.keys.include?(profile_name)
@@ -148,39 +148,6 @@ module UDSPlusTestKit
                     end
                 end
             end
-        end
-    end
-end
-
-
-def micky_test
-    manifest_content.each do |source|
-        valid_profile = PROFILE.keys.include?(source['type'])
-        profile_definition = "NO TYPE"
-        assert valid_profile, %(
-            Manifest defines contents as type #{source['type']},
-            which is not a defined UDS+ Profile type.
-        )
-
-        if valid_profile
-            profile_definition = PROFILE[source['type']]
-        else
-            next
-        end 
-
-        invalid_uri_message = "Invalid URL provided for type #{source['type']}"
-        assert_valid_http_uri(source['url'], invalid_uri_message)
-        
-        #TODO: Figure out how to retrieve info from the url
-        get source['url']
-        assert_response_status(200)
-
-        #profile_resources = []
-        request.response_body.gsub("}{", "}SPLIT HERE{").split("SPLIT HERE").each do |json_body|
-            assert_valid_json(json_body)
-
-            resource = FHIR::Json.from_json(json_body)
-            assert_valid_resource(resource: resource, profile_url: profile_definition)
         end
     end
 end
