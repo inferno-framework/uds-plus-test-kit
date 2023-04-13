@@ -23,7 +23,7 @@
     },
     {
       "name": "inputSource",
-      "valueUrl": "https://github.com/"
+      "valueUrl": "http://localhost:4567/"
     },
     {
       "name": "storageDetail",
@@ -38,7 +38,7 @@
         },
         {
           "name": "url",
-          "valueUrl": "https://github.com/drajer-health/uds-plus/blob/master/input/examples/ndjson-samples/Patient-deidentified.ndjson"
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/patient"
         },
         {
           "name": "expirationTime",
@@ -55,41 +55,7 @@
         },
         {
           "name": "url",
-          "valueUrl": "https://github.com/drajer-health/uds-plus/blob/master/input/examples/ndjson-samples/Condition-deidentified.ndjson"
-        },
-        {
-          "name": "expirationTime",
-          "valueDateTime": "2022-12-14T07:15:07-08:00"
-        }
-      ]
-    },
-    {
-      "name": "udsData",
-      "part": [
-        {
-          "name": "type",
-          "valueCode": "Coverage"
-        },
-        {
-          "name": "url",
-          "valueUrl": "http://www.fqhc.california.com/udsplus/storage/2023/Coverage.ndjson"
-        },
-        {
-          "name": "expirationTime",
-          "valueDateTime": "2022-12-14T07:15:07-08:00"
-        }
-      ]
-    },
-    {
-      "name": "udsData",
-      "part": [
-        {
-          "name": "type",
-          "valueCode": "Procedure"
-        },
-        {
-          "name": "url",
-          "valueUrl": "http://www.fqhc.california.com/udsplus/storage/2023/Procedure.ndjson"
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/condition"
         },
         {
           "name": "expirationTime",
@@ -106,7 +72,7 @@
         },
         {
           "name": "url",
-          "valueUrl": "http://www.fqhc.california.com/udsplus/storage/2023/Encounter.ndjson"
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/encounter"
         },
         {
           "name": "expirationTime",

@@ -31,6 +31,41 @@ module UDSPlusTestKit
 
         id :uds_plus
 
+        # Example urls generated here
+        patient_ex = File.read(File.join(__dir__, 'examples/patient.ndjson'))
+        patient_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [patient_ex]] }
+        route(:get, "/examples/patient", patient_ex_route_handler)
+
+        condition_ex = File.read(File.join(__dir__, 'examples/condition.ndjson'))
+        condition_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [condition_ex]] }
+        route(:get, "/examples/condition", condition_ex_route_handler)
+
+        encounter_ex = File.read(File.join(__dir__, 'examples/encounter.ndjson'))
+        encounter_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [encounter_ex]] }
+        route(:get, "/examples/encounter", encounter_ex_route_handler)
+
+        group do
+            title 'does example work'
+            id :uds_plus_trial_group
+            test do 
+                id :uds_plus_ex_test
+                title 'Receive UDS+ patient'
+                run do
+                    puts ""
+                    puts "#{Inferno::Application['base_url']}/custom/uds_plus/examples/patient"
+                    puts ""
+                    
+                    get "#{Inferno::Application['base_url']}/custom/uds_plus/examples/patient"
+                    
+                    puts ""
+                    puts request.response_body.delete("\n")
+                    puts ""
+                    
+                    pass
+                end
+            end
+        end
+
         group do
             title 'UDS+ Submission Tests'
             id :uds_plus_submitter_group
@@ -157,8 +192,34 @@ module UDSPlusTestKit
                         get profile_url
                         assert_response_status(200)
 
+                        puts ""
+                        puts request.response_body.delete("\n")
+                        puts ""
+
+                        #pass
+
+                        puts ""
+                        puts request.response_body.delete("\n").gsub(/} *{/, "}SPLIT HERE{")
+                        puts ""
+
+                        puts ""
+                        puts request.response_body.delete("\n").gsub("}{", "}SPLIT HERE{")
+                        puts ""
+
+                        puts ""
+                        puts request.response_body.gsub("}{", "}SPLIT HERE{")
+                        puts ""
+
+                        #pass
+
                         #profile_resources = []
-                        request.response_body.gsub("}{", "}SPLIT HERE{").split("SPLIT HERE").each do |json_body|
+                        #request.response_body.delete("\n").gsub(/\} *\{/, "}SPLIT HERE{").split("SPLIT HERE").each do |json_body|
+                        request.response_body.each_line do |json_body|
+                            puts ""
+                            puts "TYPE: #{profile_name}"
+                            puts json_body
+                            puts ""
+                            
                             assert_valid_json(json_body)
 
                             resource = FHIR::Json.from_json(json_body)
