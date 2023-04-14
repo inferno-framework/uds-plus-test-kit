@@ -17,17 +17,18 @@ module UDSPlusTestKit
             url ENV.fetch('VALIDATOR_URL', 'http://validator_service:4567')
         end
 
+        PROFILE_VERSION = '0.3.0'
         PROFILE = {
-            'SexualOrientation' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-sexual-orientation-observation'.freeze,
-            'ImportManifest' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-import-manifest'.freeze,
-            'Income' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-income-observation'.freeze,
-            'DeIdentifyData' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-deidentify-data'.freeze,
-            'Procedure' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-procedure'.freeze,
-            'Patient' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/de-identified-uds-plus-patient'.freeze,
-            'Encounter' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-encounter'.freeze,
-            'Coverage' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-coverage'.freeze,
-            'Diagnosis' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-diagnosis'.freeze
-        }.freeze
+            'SexualOrientation' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-sexual-orientation-observation',
+            'ImportManifest' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-import-manifest',
+            'Income' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-income-observation',
+            'DeIdentifyData' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-deidentify-data',
+            'Procedure' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-procedure',
+            'Patient' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/de-identified-uds-plus-patient',
+            'Encounter' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-encounter',
+            'Coverage' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-coverage',
+            'Diagnosis' => 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-diagnosis'
+        }
 
         id :uds_plus
 
@@ -113,6 +114,12 @@ module UDSPlusTestKit
                         assert_valid_json(import_manifest, "JSON inputted was not in a valid format")
                         manifest = import_manifest
                     end
+
+                    #earlyStop = 2
+                    #while manifest[-1] != '}' && earlyStop >= 0
+                    #    manifest = manifest.chop
+                    #    earlyStop -= 1
+                    #end
                     
                     resource = FHIR::Json.from_json(manifest)
                     assert resource.is_a?(FHIR::Model), "Could not generate a valid resource from the input provided"                    
@@ -133,7 +140,8 @@ module UDSPlusTestKit
                 input :manifest
                 run do
                     resource = FHIR::Json.from_json(manifest)
-                    assert_valid_resource(resource: resource, profile_url: PROFILE['ImportManifest'])
+                    profile_with_version = "#{PROFILE['ImportManifest']}|#{PROFILE_VERSION}"
+                    assert_valid_resource(resource: resource, profile_url: profile_with_version)
                 end
             end
                         
@@ -222,8 +230,15 @@ module UDSPlusTestKit
                             
                             assert_valid_json(json_body)
 
+                            #earlyStop = 2
+                            #while json_body[-1] != '}' && earlyStop >= 0
+                            #    json_body = json_body.chop
+                            #    earlyStop -= 1
+                            #end
+
                             resource = FHIR::Json.from_json(json_body)
-                            assert_valid_resource(resource: resource, profile_url: profile_definition)
+                            profile_with_version = "#{profile_definition}|#{PROFILE_VERSION}"
+                            assert_valid_resource(resource: resource, profile_url: profile_with_version)
                         end
                     end
                 end
