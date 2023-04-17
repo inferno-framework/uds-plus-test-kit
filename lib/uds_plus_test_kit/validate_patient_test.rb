@@ -26,10 +26,6 @@ module UDSPlusTestKit
             profile_definition = 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/de-identified-uds-plus-patient'
             profile_with_version = "#{profile_definition}|#{UDS_PLUS_VERSION}"
 
-            puts ""
-            puts profile_with_version
-            puts ""
-
             data_to_test.each do |resource|
                 assert_valid_resource(resource: resource, profile_url: profile_with_version)
             end
