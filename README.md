@@ -2,13 +2,24 @@
 - [Inferno documentation](https://inferno-framework.github.io/inferno-core/)
 - [Ruby API documentation](https://inferno-framework.github.io/inferno-core/docs)
 - [JSON API documentation](https://inferno-framework.github.io/inferno-core/api-docs)
+- [Sample NDJSON Files](https://github.com/drajer-health/uds-plus/tree/master/input/examples/ndjson-samples)
+
 ### Useful Methods and Definitions
 - [Bundle definition](https://www.rubydoc.info/gems/fhir_client/3.0.2/FHIR/Bundle)
 - [Route documentation](https://inferno-framework.github.io/inferno-core/docs/Inferno/DSL/Runnable.html#resume_test_route-instance_method)
 - [Resource Profile Definitions](http://fhir.drajer.com/site/artifacts.html#structures-resource-profiles)
 
+## Connectathon Prep Links
+- [Connectathon Manager](http://conman.clinfhir.com/connectathon.html?event=con33)
+- [Connectathon Manager Tutorial](https://www.youtube.com/watch?v=wBHHgZrSF-k)
+- [Old UDS Data Table Info](https://bphc.hrsa.gov/sites/default/files/bphc/data-reporting/2022-uds-tables.pdf)
+- [FHIR 101 Video](https://vimeo.com/542197402/8fb80fea04)
+- [UDS+ Connectathon Page](https://confluence.hl7.org/pages/viewpage.action?pageId=161056877)
+
+
 ## Important Links in the IG
 ### [How UDS+ Works](http://fhir.drajer.com/site/usecases.html#uds-data-submission-workflow-using-fhir) 
+### [UDS+ Receiver Details](http://fhir.drajer.com/site/reportingguidance.html)
 ### [Possible Outside Test Kits to Integrate](http://fhir.drajer.com/site/background.html#underlying-specifications)
 These include:
 - US Core FHIR IG
