@@ -49,6 +49,18 @@ module UDSPlusTestKit
         encounter_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [encounter_ex]] }
         route(:get, "/examples/encounter", encounter_ex_route_handler)
 
+        manifest_ex = File.read(File.join(__dir__, 'examples/manifest.json'))
+        manifest_ex_route_handler = proc { [200, { 'Content-Type' => 'application/json' }, [manifest_ex]] }
+        route(:get, "/examples/manifest", manifest_ex_route_handler)
+        
+        bad_condition_ex = File.read(File.join(__dir__, 'examples/invalid_condition.ndjson'))
+        bad_condition_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [bad_condition_ex]] }
+        route(:get, "/examples/invalid_condition", bad_condition_ex_route_handler)
+
+        bad_patient_ex = File.read(File.join(__dir__, 'examples/invalid_patient.ndjson'))
+        bad_patient_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [bad_patient_ex]] }
+        route(:get, "/examples/invalid_patient", bad_patient_ex_route_handler)
+
         group from: :uds_plus_test_group
     end
 end
