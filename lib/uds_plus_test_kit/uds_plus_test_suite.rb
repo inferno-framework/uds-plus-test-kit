@@ -2,7 +2,8 @@ require 'inferno/dsl/oauth_credentials'
 require 'smart_app_launch_test_kit'
 require_relative './ext/fhir_models'
 require_relative './version'
-require_relative './uds_plus_test_group'
+require_relative './manifest_tests/uds_plus_test_group'
+require_relative './input_resource_tests/resource_group'
 
 module UDSPlusTestKit
     class UDSPlusTestSuite < Inferno::TestSuite
@@ -62,5 +63,6 @@ module UDSPlusTestKit
         route(:get, "/examples/invalid_patient", bad_patient_ex_route_handler)
 
         group from: :uds_plus_test_group
+        group from: :uds_plus_resource_test_group
     end
 end

@@ -1,6 +1,6 @@
 require 'json'
-require_relative './ext/fhir_models'
-require_relative './version'
+require_relative '../ext/fhir_models'
+require_relative '../version'
 
 module UDSPlusTestKit
     class ValidateManifestTest < Inferno::Test
