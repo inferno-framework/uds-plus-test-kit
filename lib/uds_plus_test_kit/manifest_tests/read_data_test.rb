@@ -26,11 +26,11 @@ module UDSPlusTestKit
         def manifest_content
             return [] if manifest_resources.empty?
             manifest_hash = JSON.parse(manifest_resources.first.to_json)
-            manifest_hash['parameter']
+            manifest_hash['parameter'] ||= []
         end
 
         run do
-            skip_if manifest_resources.empty?, "No valid resource object generated in first test, so this test will be skipped."
+            skip_if manifest_content.empty?, "No valid resource object generated in first test, so this test will be skipped."
   
             manifest_content.each do |source|
                 #Iterate through manifest until udsData is found

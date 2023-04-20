@@ -21,7 +21,7 @@ module UDSPlusTestKit
         end
 
         run do
-            omit_if data_to_test.empty?, "No data of this type was identified in the import manifest."
+            omit_if data_to_test.empty?, "No data of this type was identified."
 
             profile_definition = 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-coverage'
             profile_with_version = "#{profile_definition}|#{UDS_PLUS_VERSION}"

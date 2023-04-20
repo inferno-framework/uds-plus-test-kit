@@ -16,13 +16,16 @@ require_relative '../validate_procedure_test'
 require_relative '../validate_sexual_orientation_test'
 
 module UDSPlusTestKit
-    class UDSPlusTestGroup < Inferno::TestGroup
+    class UDSPlusResourceTestGroup < Inferno::TestGroup
         title 'Individual Resource Tests'
         id :uds_plus_resource_test_group
         description %(
             The tests below skip the import manifest step. Instead, 
             users can input individual resources, either by url or as 
-            a raw json, and have these resources validated.
+            a raw json, and have these resources validated. **Importand Note:**
+            The purpose of these tests is to quickly retest a specific resource that
+            previously failed. The test can only handle one json resource per type,
+            unlike the manifest test, which can handle an ndjson containing many objects.
         )
 
         run_as_group
