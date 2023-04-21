@@ -1,5 +1,5 @@
 require 'inferno/dsl/oauth_credentials'
-require 'smart_app_launch_test_kit'
+#require 'smart_app_launch_test_kit'
 require_relative './ext/fhir_models'
 require_relative './version'
 require_relative './manifest_tests/uds_plus_test_group'
@@ -11,9 +11,9 @@ module UDSPlusTestKit
         description %(
             The UDS+ Test Kit tests systems for their conformance to the [UDS+
             Implementation Guide](http://fhir.drajer.com/site/index.html#uds-plus-home-page).
-            The included tests function as a rudimentary Data receiver. This receiver will 
+            The included tests function as a rudimentary data receiver. This receiver will 
             take a provided Import Manifest, either as an HTTP location or as a raw json,
-            and validate its contents. This included validating the structure of the manifest,
+            and validate its contents. This includes validating the structure of the manifest,
             as well as the structure of the data the manifest points to.
         )
 

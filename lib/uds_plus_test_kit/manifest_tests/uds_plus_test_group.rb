@@ -19,7 +19,7 @@ module UDSPlusTestKit
         description %(
             The tests below validate the import manifest produced by a UDS+ Data Submitter. 
             This receiver will take a provided Import Manifest, either as an HTTP location or 
-            as a raw json, and validate its contents. This included validating the structure 
+            as a raw json, and validate its contents. This includes validating the structure 
             of the manifest, as well as the structure of the data the manifest points to.
         )
 
