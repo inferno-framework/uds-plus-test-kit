@@ -16,9 +16,8 @@ module UDSPlusTestKit
 
         def valid_data_types
             [
-                'QICoreCoverage', 'Condition', 'Encounter', 
-                'Observation', 'Patient', 'Procedure',
-                'USCoreObservationSexualOrientationProfile'
+                'Coverage', 'Condition', 'Encounter', 
+                'Observation', 'Patient', 'Procedure'
             ]
         end
 

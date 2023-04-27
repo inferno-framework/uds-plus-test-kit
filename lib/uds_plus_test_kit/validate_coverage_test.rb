@@ -17,7 +17,7 @@ module UDSPlusTestKit
         end
 
         def data_to_test
-            data_scratch['QICoreCoverage'] ||= []
+            data_scratch['Coverage'] ||= []
         end
 
         run do

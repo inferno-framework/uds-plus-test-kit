@@ -26,7 +26,7 @@ module UDSPlusTestKit
         end
 
         def data_to_test
-            data_scratch['USCoreObservationSexualOrientationProfile'] ||= []
+            data_scratch['Observation'] ||= []
         end
 
         run do
