@@ -4,6 +4,7 @@ require_relative './ext/fhir_models'
 require_relative './version'
 require_relative './manifest_tests/uds_plus_test_group'
 require_relative './input_resource_tests/resource_group'
+require_relative './dev_test'
 
 module UDSPlusTestKit
     class UDSPlusTestSuite < Inferno::TestSuite
@@ -64,5 +65,6 @@ module UDSPlusTestKit
 
         group from: :uds_plus_test_group
         group from: :uds_plus_resource_test_group
+        group from: :dev_test
     end
 end
