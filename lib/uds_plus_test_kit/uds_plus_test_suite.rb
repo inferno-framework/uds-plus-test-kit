@@ -21,6 +21,12 @@ module UDSPlusTestKit
 
         validator do
             url ENV.fetch('VALIDATOR_URL', 'http://validator_service:4567')
+
+            # Messages will be excluded if the block evaluates to a truthy value
+            exclude_message do |message|
+                message.type == 'warning' &&
+                message.message.match?(/Global Profile reference .* could not be resolved, so has not been checked/)
+            end
         end
 
         PROFILE = {
