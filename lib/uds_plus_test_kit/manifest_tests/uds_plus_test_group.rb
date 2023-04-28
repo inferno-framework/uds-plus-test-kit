@@ -14,7 +14,7 @@ require_relative '../validate_sexual_orientation_test'
 
 module UDSPlusTestKit
     class UDSPlusTestGroup < Inferno::TestGroup
-        title 'Import Manifest Tests'
+        title 'Data Submitter Tests'
         id :uds_plus_test_group 
         description %(
             The tests below validate the import manifest produced by a UDS+ Data Submitter. 

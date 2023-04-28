@@ -14,6 +14,8 @@ require_relative '../validate_income_test'
 require_relative '../validate_patient_test'
 require_relative '../validate_procedure_test'
 require_relative '../validate_sexual_orientation_test'
+require_relative '../manifest_tests/read_manifest_test'
+require_relative '../manifest_tests/validate_manifest_test'
 
 module UDSPlusTestKit
     class UDSPlusResourceTestGroup < Inferno::TestGroup
@@ -25,11 +27,13 @@ module UDSPlusTestKit
             a raw json, and have these resources validated. **Important Note:**
             The purpose of these tests is to quickly test a specific resource. 
             The test can only handle one json resource per type, unlike the 
-            manifest test, which can handle an ndjson containing many objects.
+            Data Submitter test, which can handle an ndjson containing many objects.
         )
 
         run_as_group
 
+        test from: :uds_plus_read_manifest_test
+        test from: :uds_plus_validate_manifest_test
         test from: :uds_plus_read_coverage_test
         test from: :uds_plus_validate_coverage_test
         test from: :uds_plus_read_diagnosis_test
