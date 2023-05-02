@@ -1,5 +1,5 @@
 require 'json'
-require_relative '../ext/fhir_models'
+
 
 module UDSPlusTestKit
     class PostManifestTest < Inferno::Test

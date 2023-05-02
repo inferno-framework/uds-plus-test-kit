@@ -1,5 +1,4 @@
 require 'json'
-require_relative '../ext/fhir_models'
 
 module UDSPlusTestKit
     class ReadImmunizationTest < Inferno::Test

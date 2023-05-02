@@ -1,4 +1,4 @@
-require_relative '../ext/fhir_models'
+
 require_relative '../version'
 
 require_relative './post_manifest_test'
