@@ -1,4 +1,3 @@
-require_relative '../ext/fhir_models'
 require_relative '../version'
 require_relative './invalid_type_test'
 require_relative './read_data_test'

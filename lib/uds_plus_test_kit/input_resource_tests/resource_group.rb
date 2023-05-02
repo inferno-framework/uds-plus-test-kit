@@ -1,4 +1,3 @@
-require_relative '../ext/fhir_models'
 require_relative '../version'
 require_relative './read_coverage_test'
 require_relative './read_diagnosis_test'
