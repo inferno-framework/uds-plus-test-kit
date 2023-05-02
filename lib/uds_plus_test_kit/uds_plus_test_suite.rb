@@ -1,5 +1,4 @@
 require 'inferno/dsl/oauth_credentials'
-require_relative './ext/fhir_models'
 require_relative './version'
 require_relative './manifest_tests/uds_plus_test_group'
 require_relative './input_resource_tests/resource_group'
