@@ -68,6 +68,21 @@ module UDSPlusTestKit
             request.query_parameters["id"]
         end
 
+        links [
+            {
+              label: 'Report Issue',
+              url: 'https://github.com/inferno-framework/uds-plus-test-kit/issues'
+            },
+            {
+              label: 'Open Source',
+              url: 'https://github.com/inferno-framework/uds-plus-test-kit/'
+            },
+            {
+              label: 'UDS+ Implementation Guide',
+              url: 'http://fhir.drajer.com/site/index.html'
+            }
+          ]
+
         group from: :uds_plus_test_group
         group from: :uds_plus_manifest_post_group 
         group from: :uds_plus_resource_test_group
