@@ -1,5 +1,4 @@
 require 'json'
-require_relative '../ext/fhir_models'
 require_relative '../version'
 
 module UDSPlusTestKit

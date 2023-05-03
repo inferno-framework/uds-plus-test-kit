@@ -1,5 +1,4 @@
 require 'inferno/dsl/oauth_credentials'
-require_relative './ext/fhir_models'
 require_relative './version'
 require_relative './manifest_tests/uds_plus_test_group'
 require_relative './input_resource_tests/resource_group'
@@ -29,6 +28,21 @@ module UDSPlusTestKit
         end
 
         id :uds_plus
+
+        links [
+            {
+              label: 'Report Issue',
+              url: 'https://github.com/inferno-framework/uds-plus-test-kit/issues'
+            },
+            {
+              label: 'Open Source',
+              url: 'https://github.com/inferno-framework/uds-plus-test-kit/'
+            },
+            {
+              label: 'UDS+ Implementation Guide',
+              url: 'http://fhir.drajer.com/site/index.html'
+            }
+          ]
 
         group from: :uds_plus_test_group
         group from: :uds_plus_resource_test_group
