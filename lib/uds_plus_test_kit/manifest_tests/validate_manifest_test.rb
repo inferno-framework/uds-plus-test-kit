@@ -21,6 +21,8 @@ module UDSPlusTestKit
         end
 
         run do
+            omit_if manifest_resources.empty?, "No data of this type was identified."
+            
             profile_definition = "http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-import-manifest"
             profile_with_version = "#{profile_definition}|#{UDS_PLUS_VERSION}"
             assert_valid_resource(resource: manifest_resources.first, profile_url: profile_with_version)

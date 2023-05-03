@@ -14,7 +14,7 @@ require_relative '../validate_income_test'
 require_relative '../validate_patient_test'
 require_relative '../validate_procedure_test'
 require_relative '../validate_sexual_orientation_test'
-require_relative '../manifest_tests/read_manifest_test'
+require_relative './read_manifest_ind_test'
 require_relative '../manifest_tests/validate_manifest_test'
 
 module UDSPlusTestKit
@@ -32,7 +32,7 @@ module UDSPlusTestKit
 
         run_as_group
 
-        test from: :uds_plus_read_manifest_test
+        test from: :uds_plus_read_manifest_ind_test
         test from: :uds_plus_validate_manifest_test
         test from: :uds_plus_read_coverage_test
         test from: :uds_plus_validate_coverage_test
