@@ -16,6 +16,8 @@ require_relative '../validate_procedure_test'
 require_relative '../validate_sexual_orientation_test'
 require_relative './read_manifest_ind_test'
 require_relative '../manifest_tests/validate_manifest_test'
+require_relative './read_special_observation_test'
+require_relative '../validate_special_observation_test'
 
 module UDSPlusTestKit
     class UDSPlusResourceTestGroup < Inferno::TestGroup
@@ -48,5 +50,7 @@ module UDSPlusTestKit
         test from: :uds_plus_validate_procedure_test
         test from: :uds_plus_read_sexual_orientation_test
         test from: :uds_plus_validate_sexual_orientation_test
+        test from: :uds_plus_read_special_observation_test
+        test from: :uds_plus_validate_special_observation_test
     end
 end

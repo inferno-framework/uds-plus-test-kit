@@ -11,6 +11,7 @@ require_relative './validate_manifest_test'
 require_relative '../validate_patient_test'
 require_relative '../validate_procedure_test'
 require_relative '../validate_sexual_orientation_test'
+require_relative '../validate_special_observation_test'
 
 module UDSPlusTestKit
     class UDSPlusTestGroup < Inferno::TestGroup
@@ -35,6 +36,7 @@ module UDSPlusTestKit
         test from: :uds_plus_validate_patient_test
         test from: :uds_plus_validate_procedure_test
         test from: :uds_plus_validate_sexual_orientation_test
+        test from: :uds_plus_validate_special_observation_test
         test from: :uds_plus_invalid_type_test
     end
 end
