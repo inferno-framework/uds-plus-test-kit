@@ -30,6 +30,35 @@ module UDSPlusTestKit
 
         id :uds_plus
 
+        # Example urls generated here
+        patient_ex = File.read(File.join(__dir__, 'examples/patient.ndjson'))
+        patient_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [patient_ex]] }
+        route(:get, "/examples/patient", patient_ex_route_handler)
+
+        condition_ex = File.read(File.join(__dir__, 'examples/condition.ndjson'))
+        condition_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [condition_ex]] }
+        route(:get, "/examples/condition", condition_ex_route_handler)
+
+        encounter_ex = File.read(File.join(__dir__, 'examples/encounter.ndjson'))
+        encounter_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [encounter_ex]] }
+        route(:get, "/examples/encounter", encounter_ex_route_handler)
+
+        manifest_ex = File.read(File.join(__dir__, 'examples/manifest.json'))
+        manifest_ex_route_handler = proc { [200, { 'Content-Type' => 'application/json' }, [manifest_ex]] }
+        route(:get, "/examples/manifest", manifest_ex_route_handler)
+        
+        bad_condition_ex = File.read(File.join(__dir__, 'examples/invalid_condition.ndjson'))
+        bad_condition_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [bad_condition_ex]] }
+        route(:get, "/examples/invalid_condition", bad_condition_ex_route_handler)
+
+        bad_patient_ex = File.read(File.join(__dir__, 'examples/invalid_patient.ndjson'))
+        bad_patient_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [bad_patient_ex]] }
+        route(:get, "/examples/invalid_patient", bad_patient_ex_route_handler)
+
+        bad_encounter_ex = File.read(File.join(__dir__, 'examples/invalid_encounter.ndjson'))
+        bad_encounter_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [bad_encounter_ex]] }
+        route(:get, "/examples/invalid_encounter", bad_encounter_ex_route_handler)
+
         group from: :uds_plus_test_group
         group from: :uds_plus_resource_test_group
     end
