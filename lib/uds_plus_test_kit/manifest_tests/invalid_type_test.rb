@@ -17,7 +17,8 @@ module UDSPlusTestKit
         def valid_data_types
             [
                 'Coverage', 'Condition', 'Encounter', 
-                'Observation', 'Patient', 'Procedure'
+                'Observation', 'Patient', 'Procedure',
+                'RelatedPerson', 'Immunization'
             ]
         end
 

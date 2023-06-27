@@ -30,14 +30,13 @@ module UDSPlusTestKit
             identifier_fail_message = %(Resource.meta.profile should contain the HTTP location of the 
                                         resource's Structure Definition. Resource.meta.profile either does 
                                         not exist in this resource, or its contents do not point to a valid
-                                        location for type Observation (Income/Sexual Orientation). **NOTE:**
-                                        If this error occurs, it can trigger a fail for both the Income and
-                                        Sexual Orientation tests, regardless of whether both tests were meant
-                                        to run.)
+                                        location for type Observation. **NOTE:**
+                                        If this error occurs, it can trigger a fail for all observation-type tests, 
+                                        regardless of whether both tests were meant to run.)
 
             data_to_test.each do |resource|
-                # All these assertions are to differentaite Observation data between Income Data and Sexual Orientation data.
-                # A resource is skipped if it is a sexual orientation resource and fails if it cannot be identified as an income resource.
+                # All these assertions are to differentaite Observation data between orientation types.
+                # A resource is skipped if it cannot be identified as an income resource.
                 type_identifier = resource.to_hash
                 assert type_identifier['meta'].present?, identifier_fail_message
 
