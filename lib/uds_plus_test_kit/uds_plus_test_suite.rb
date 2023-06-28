@@ -3,6 +3,7 @@ require_relative './ext/fhir_models'
 require_relative './version'
 require_relative './manifest_tests/uds_plus_test_group'
 require_relative './input_resource_tests/resource_group'
+require_relative './post_tests/post_group'
 
 module UDSPlusTestKit
     class UDSPlusTestSuite < Inferno::TestSuite
@@ -59,7 +60,13 @@ module UDSPlusTestKit
         bad_encounter_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [bad_encounter_ex]] }
         route(:get, "/examples/invalid_encounter", bad_encounter_ex_route_handler)
 
+        # Receive Manifest via POST set-up
+        resume_test_route :post, '/postHere' do |request|
+            request.query_parameters["id"]
+        end
+
         group from: :uds_plus_test_group
+        group from: :uds_plus_manifest_post_group 
         group from: :uds_plus_resource_test_group
     end
 end
