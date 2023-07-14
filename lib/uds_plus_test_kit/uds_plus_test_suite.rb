@@ -60,6 +60,10 @@ module UDSPlusTestKit
         bad_encounter_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [bad_encounter_ex]] }
         route(:get, "/examples/invalid_encounter", bad_encounter_ex_route_handler)
 
+        observation_ex = File.read(File.join(__dir__, 'examples/observation.ndjson'))
+        observation_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [observation_ex]] }
+        route(:get, "/examples/observation", observation_ex_route_handler)
+
         # Receive Manifest via POST set-up
         resume_test_route :post, '/postHere' do |request|
             request.query_parameters["id"]

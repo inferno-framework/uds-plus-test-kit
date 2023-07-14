@@ -23,7 +23,7 @@ module UDSPlusTestKit
         run do
             omit_if data_to_test.empty?, "No data of this type was identified."
 
-            profile_definition = 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-income-observation'
+            profile_definition = 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/de-identified-uds-plus-income-observation'
             profile_with_version = "#{profile_definition}|#{UDS_PLUS_VERSION}"
 
             no_resource_of_this_type = true

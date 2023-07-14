@@ -18,7 +18,9 @@ module UDSPlusTestKit
             [
                 'Coverage', 'Condition', 'Encounter', 
                 'Observation', 'Patient', 'Procedure',
-                'RelatedPerson', 'Immunization'
+                'RelatedPerson', 'Immunization',
+                'ServiceRequest', 'MedicationRequest', 
+                'MedicationStatement'
             ]
         end
 
