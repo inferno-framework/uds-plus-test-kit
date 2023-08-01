@@ -78,7 +78,7 @@ module UDSPlusTestKit
               url: 'https://github.com/inferno-framework/uds-plus-test-kit/'
             },
             {
-              label: 'UDS+ Implementation Guide',
+              label: 'UDS+ Implementation Guide v0.4.1',
               url: 'http://fhir.drajer.com/index.html#uds-plus-home-page'
             }
           ]

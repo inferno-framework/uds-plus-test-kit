@@ -68,12 +68,12 @@ module UDSPlusTestKit
         test from: :uds_plus_read_lab_test
         test from: :uds_plus_validate_lab_test
         test from: :uds_plus_read_special_observation_test
+        test from: :uds_plus_validate_special_observation_test
         test from: :uds_plus_read_medication_request_test
         test from: :uds_plus_validate_medication_request_test
         test from: :uds_plus_read_medication_statement_test
         test from: :uds_plus_validate_medication_statement_test
         test from: :uds_plus_read_service_request_test
         test from: :uds_plus_validate_service_request_test
-        test from: :uds_plus_validate_special_observation_test
     end
 end
