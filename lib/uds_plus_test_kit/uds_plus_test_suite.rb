@@ -9,7 +9,7 @@ module UDSPlusTestKit
         title 'UDS+ Test Kit'
         description %(
             The UDS+ Test Kit tests systems for their conformance to the [UDS+
-            Implementation Guide](http://fhir.drajer.com/index.html#uds-plus-home-page).
+            Implementation Guide](http://udsplus.drajer.com).
             The included tests function as a rudimentary data receiver. This receiver will 
             take a provided Import Manifest, either as an HTTP location or as a raw json,
             and validate its contents. This includes validating the structure of the manifest,
@@ -79,7 +79,7 @@ module UDSPlusTestKit
             },
             {
               label: 'UDS+ Implementation Guide v0.4.1',
-              url: 'http://fhir.drajer.com/index.html#uds-plus-home-page'
+              url: 'http://udsplus.drajer.com'
             }
           ]
 
