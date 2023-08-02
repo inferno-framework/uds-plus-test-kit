@@ -9,3 +9,7 @@
 - [Connectathon Manager Tutorial](https://www.youtube.com/watch?v=wBHHgZrSF-k)
 - [FHIR 101 Video](https://vimeo.com/542197402/8fb80fea04)
 - [UDS+ Connectathon Page](https://confluence.hl7.org/pages/viewpage.action?pageId=161056877)
+
+## Version
+**Test Kit:** 1.0.2
+**IG:** 0.4.1
