@@ -29,6 +29,14 @@ require_relative './read_med_statement_test'
 require_relative '../validate_med_statement_test'
 require_relative './read_service_request_test'
 require_relative '../validate_service_request_test'
+require_relative './read_location_test'
+require_relative '../validate_location_test'
+require_relative './read_allergy_intolerance_test'
+require_relative '../validate_allergy_intolerance_test'
+require_relative './read_adverse_event_test'
+require_relative '../validate_adverse_event_test'
+require_relative './read_clinical_result_test'
+require_relative '../validate_clinical_result_test'
 
 module UDSPlusTestKit
     class UDSPlusResourceTestGroup < Inferno::TestGroup
@@ -61,12 +69,20 @@ module UDSPlusTestKit
         test from: :uds_plus_validate_related_person_test
         test from: :uds_plus_read_immunization_test
         test from: :uds_plus_validate_immunization_test
+        test from: :uds_plus_read_location_test
+        test from: :uds_plus_validate_location_test
+        test from: :uds_plus_read_allergy_intolerance_test
+        test from: :uds_plus_validate_allergy_intolerance_test
+        test from: :uds_plus_read_adverse_event_test
+        test from: :uds_plus_validate_adverse_event_test
         test from: :uds_plus_read_income_test
         test from: :uds_plus_validate_income_test
         test from: :uds_plus_read_sexual_orientation_test
         test from: :uds_plus_validate_sexual_orientation_test
         test from: :uds_plus_read_lab_test
         test from: :uds_plus_validate_lab_test
+        test from: :uds_plus_read_clinical_result_test
+        test from: :uds_plus_validate_clinical_result_test
         test from: :uds_plus_read_special_observation_test
         test from: :uds_plus_validate_special_observation_test
         test from: :uds_plus_read_medication_request_test
