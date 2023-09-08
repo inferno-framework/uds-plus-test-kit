@@ -20,7 +20,8 @@ module UDSPlusTestKit
                 'Observation', 'Patient', 'Procedure',
                 'RelatedPerson', 'Immunization',
                 'ServiceRequest', 'MedicationRequest', 
-                'MedicationStatement'
+                'MedicationStatement', 'Location',
+                'AdverseEvent', 'AllergyIntolerance'
             ]
         end
 

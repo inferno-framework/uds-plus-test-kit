@@ -2,14 +2,13 @@ require 'json'
 require_relative './version'
 
 module UDSPlusTestKit
-    class ValidateSpecialObservationTest < Inferno::Test
-        id :uds_plus_validate_special_observation_test
-        title 'Validate UDS+ Special Observation Data'
+    class ValidateClinicalResultTest < Inferno::Test
+        id :uds_plus_validate_clinical_result_test
+        title 'Validate UDS+ Clinical Result Data'
         description %(
-            Test takes the Special Observation resources identified 
-            (such as uds-special-population-observation) by the import 
-            manifest, and validates whether they conform to their 
-            UDS+ Structure Definitions.
+            Test takes the Clinical Result resources identified 
+            by the import manifest, and validates whether they conform 
+            to their UDS+ Structure Definitions.
         )
 
         def data_scratch
@@ -23,6 +22,9 @@ module UDSPlusTestKit
         run do
             omit_if data_to_test.empty?, "No data of this type was identified."
 
+            profile_definition = 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/de-identified-uds-plus-clinical-result-observation'
+            profile_with_version = "#{profile_definition}|#{UDS_PLUS_VERSION}"
+
             no_resource_of_this_type = true
             identifier_fail_message = %(Resource.meta.profile should contain the HTTP location of the 
                                         resource's Structure Definition. Resource.meta.profile either does 
@@ -33,7 +35,7 @@ module UDSPlusTestKit
 
             data_to_test.each do |resource|
                 # All these assertions are to differentaite Observation data between orientation types.
-                # A resource is skipped if it is one of the observation types with their own tests.
+                # A resource is skipped if it cannot be identified as an clinical result resource.
                 type_identifier = resource.to_hash
                 assert type_identifier['meta'].present?, identifier_fail_message
 
@@ -48,22 +50,13 @@ module UDSPlusTestKit
 
                 type_identifier = type_identifier.first
                 assert type_identifier.is_a?(String), identifier_fail_message
-                
-                known_observations = ["income", "sexual-orientation", "-lab-", "clinical-result"]
-                is_known_observation = false
-                known_observations.each do |cur|
-                    is_known_observation = (is_known_observation || type_identifier.include?(cur))
-                end
-
-                if is_known_observation
+                if !type_identifier.include?("clinical-result")
                     next
-                else
-                    assert type_identifier.downcase.include?("observation"), identifier_fail_message
                 end
                     
                 no_resource_of_this_type = false
 
-                assert_valid_resource(resource: resource)
+                assert_valid_resource(resource: resource, profile_url: profile_with_version)
             end
 
             omit_if no_resource_of_this_type, "No data of this type was identified."
