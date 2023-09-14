@@ -2,11 +2,11 @@ require 'json'
 require_relative './version'
 
 module UDSPlusTestKit
-    class ValidateClinicalResultTest < Inferno::Test
-        id :uds_plus_validate_clinical_result_test
-        title 'Validate UDS+ Clinical Result Data'
+    class ValidatePatientReportingParametersTest < Inferno::Test
+        id :uds_plus_validate_patient_reporting_parameters_test
+        title 'Validate UDS+ Patient Reporting Parameters Data'
         description %(
-            Test takes the Clinical Result resources identified 
+            Test takes the Patient Reporting Parameters resources identified 
             by the import manifest, and validates whether they conform 
             to their UDS+ Structure Definitions.
         )
@@ -16,26 +16,26 @@ module UDSPlusTestKit
         end
 
         def data_to_test
-            data_scratch['Observation'] ||= []
+            data_scratch['Parameters'] ||= []
         end
 
         run do
             omit_if data_to_test.empty?, "No data of this type was identified."
 
-            profile_definition = 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/de-identified-uds-plus-clinical-result-observation'
+            profile_definition = 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-patient-reporting-parameters'
             profile_with_version = "#{profile_definition}|#{UDS_PLUS_VERSION}"
 
             no_resource_of_this_type = true
             identifier_fail_message = %(Resource.meta.profile should contain the HTTP location of the 
                                         resource's Structure Definition. Resource.meta.profile either does 
                                         not exist in this resource, or its contents do not point to a valid
-                                        location for type Observation. **NOTE:**
-                                        If this error occurs, it can trigger a fail for all observation-type tests, 
+                                        location for type Parameters. **NOTE:**
+                                        If this error occurs, it can trigger a fail for all parameters-type tests, 
                                         regardless of whether both tests were meant to run.)
 
             data_to_test.each do |resource|
-                # All these assertions are to differentiate Observation data between orientation types.
-                # A resource is skipped if it cannot be identified as an clinical result resource.
+                # All these assertions are to differentiate Parameters data between orientation types.
+                # A resource is skipped if it cannot be identified as a patient reporting parameters resource.
                 type_identifier = resource.to_hash
                 assert type_identifier['meta'].present?, identifier_fail_message
 
@@ -50,7 +50,7 @@ module UDSPlusTestKit
 
                 type_identifier = type_identifier.first
                 assert type_identifier.is_a?(String), identifier_fail_message
-                if !type_identifier.include?("clinical-result")
+                if !type_identifier.include?("patient-reporting")
                     next
                 end
                     
