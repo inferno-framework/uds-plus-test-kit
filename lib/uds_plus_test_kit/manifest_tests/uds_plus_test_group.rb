@@ -21,6 +21,8 @@ require_relative '../validate_location_test'
 require_relative '../validate_allergy_intolerance_test'
 require_relative '../validate_adverse_event_test'
 require_relative '../validate_clinical_result_test'
+require_relative '../validate_data_urls_test'
+require_relative '../validate_patient_reporting_parameters_test'
 
 module UDSPlusTestKit
     class UDSPlusTestGroup < Inferno::TestGroup
@@ -56,6 +58,8 @@ module UDSPlusTestKit
         test from: :uds_plus_validate_medication_request_test
         test from: :uds_plus_validate_medication_statement_test
         test from: :uds_plus_validate_service_request_test
+        test from: :uds_plus_validate_data_urls_test
+        test from: :uds_plus_validate_patient_reporting_parameters_test
         test from: :uds_plus_invalid_type_test
     end
 end

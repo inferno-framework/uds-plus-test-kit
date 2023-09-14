@@ -21,7 +21,8 @@ module UDSPlusTestKit
                 'RelatedPerson', 'Immunization',
                 'ServiceRequest', 'MedicationRequest', 
                 'MedicationStatement', 'Location',
-                'AdverseEvent', 'AllergyIntolerance'
+                'AdverseEvent', 'AllergyIntolerance',
+                'Parameters'
             ]
         end
 

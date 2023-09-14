@@ -32,7 +32,7 @@ module UDSPlusTestKit
                                         regardless of whether both tests were meant to run.)
 
             data_to_test.each do |resource|
-                # All these assertions are to differentaite Observation data between orientation types.
+                # All these assertions are to differentiate Observation data between orientation types.
                 # A resource is skipped if it is one of the observation types with their own tests.
                 type_identifier = resource.to_hash
                 assert type_identifier['meta'].present?, identifier_fail_message
