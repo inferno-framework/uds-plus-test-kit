@@ -11,5 +11,5 @@
 - [UDS+ Connectathon Page](https://confluence.hl7.org/pages/viewpage.action?pageId=161056877)
 
 ## Version
-**Test Kit:** 1.0.5
+**Test Kit:** 1.0.6
 **IG:** 1.0.0
