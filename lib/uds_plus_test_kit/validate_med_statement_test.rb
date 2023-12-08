@@ -22,7 +22,7 @@ module UDSPlusTestKit
         run do
             omit_if data_to_test.empty?, "No data of this type was identified."
 
-            profile_definition = 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-medicationstatement'
+            profile_definition = 'http://fhir.org/guides/hrsa/uds-plus/StructureDefinition/uds-plus-medicationstatement'
             profile_with_version = "#{profile_definition}|#{UDS_PLUS_VERSION}"
 
             data_to_test.each do |resource|

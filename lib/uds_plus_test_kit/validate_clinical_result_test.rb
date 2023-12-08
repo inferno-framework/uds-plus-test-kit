@@ -22,7 +22,7 @@ module UDSPlusTestKit
         run do
             omit_if data_to_test.empty?, "No data of this type was identified."
 
-            profile_definition = 'http://hl7.org/fhir/us/uds-plus/StructureDefinition/uds-plus-clinical-result-observation'
+            profile_definition = 'http://fhir.org/guides/hrsa/uds-plus/StructureDefinition/uds-plus-clinical-result-observation'
             profile_with_version = "#{profile_definition}|#{UDS_PLUS_VERSION}"
 
             no_resource_of_this_type = true

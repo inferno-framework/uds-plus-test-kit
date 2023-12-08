@@ -9,7 +9,7 @@ module UDSPlusTestKit
         title 'UDS+ Test Kit'
         description %(
             The UDS+ Test Kit tests systems for their conformance to the [UDS+
-            Implementation Guide v1.0.0](http://udsplus.drajer.com).
+            Implementation Guide v1.0.1](https://fhir.org/guides/hrsa/uds-plus/).
             The included tests function as a rudimentary data receiver. This receiver will 
             take a provided Import Manifest, either as an HTTP location or as a raw json,
             and validate its contents. This includes validating the structure of the manifest,
@@ -81,8 +81,8 @@ module UDSPlusTestKit
               url: 'https://github.com/inferno-framework/uds-plus-test-kit/'
             },
             {
-              label: 'UDS+ Implementation Guide v1.0.0',
-              url: 'http://udsplus.drajer.com'
+              label: 'UDS+ Implementation Guide v1.0.1',
+              url: 'https://fhir.org/guides/hrsa/uds-plus/'
             }
           ]
 
