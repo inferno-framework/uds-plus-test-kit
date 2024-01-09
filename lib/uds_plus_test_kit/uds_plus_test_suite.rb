@@ -27,7 +27,7 @@ module UDSPlusTestKit
                 message.message.match?(/Global Profile reference .* could not be resolved, so has not been checked/)) ||
                 (message.type == 'error' &&
                 Inferno::Application['base_url'].match?(/localhost:/) &&
-                message.message.match?(/Server Error: Code .* not found in CPT;/))
+                message.message.match?(/: Code .* not found in CPT;/))
             end
         end
 

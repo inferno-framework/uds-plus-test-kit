@@ -13,3 +13,6 @@
 ## Version
 **Test Kit:** 1.0.7
 **IG:** 1.0.1
+
+### Note From the Developers
+There are known issues with validating certain codesets (not resource structure) when running this kit locally. If you are running locally and encounter an "Unknown Code" error for a given resource, try running that same resource on the hosted version of the kit and see if the codeset can be validated there.
