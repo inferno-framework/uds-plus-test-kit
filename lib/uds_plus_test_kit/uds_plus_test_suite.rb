@@ -18,11 +18,13 @@ module UDSPlusTestKit
 
         version VERSION
 
-        validator do
-            url ENV.fetch('VALIDATOR_URL', 'http://validator_service:4567')
+        fhir_resource_validator do
+            # The home-lab-report contains validation tools for certain codes missing in the UDS+ package
+            igs('fhir.hrsa.uds-plus#1.0.1', 'hl7.fhir.us.home-lab-report#1.0.0')
 
             # Messages will be excluded if the block evaluates to a truthy value
             exclude_message do |message|
+                message.message.match?(/\A\S+: \S+: URL value '.*' does not resolve/) ||
                 (message.type == 'warning' &&
                 message.message.match?(/Global Profile reference .* could not be resolved, so has not been checked/)) ||
                 (message.type == 'error' &&
