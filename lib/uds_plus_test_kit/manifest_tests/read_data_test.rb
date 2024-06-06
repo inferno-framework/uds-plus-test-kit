@@ -37,12 +37,16 @@ module UDSPlusTestKit
 
                 profile_name = "NO NAME"
                 profile_url = "NO URL"
+                bearer_token = "NO BEARER"
+                
                 source['part'].each do |container|
                     case container['name']
                     when 'type'
                         profile_name = container['valueCode']
                     when 'url'
                         profile_url = container['valueUrl']
+                    when 'bearer'
+                        bearer_token = container['valueString']
                     end
                 end
 
@@ -55,8 +59,15 @@ module UDSPlusTestKit
 
                 invalid_uri_message = "Invalid URL provided for type #{profile_name}"
                 assert_valid_http_uri(profile_url, invalid_uri_message)
-                
-                get profile_url
+
+                oauth2_headers={}
+                if bearer_token != "NO BEARER"
+                    oauth2_headers={
+                        'Authorization' => "Bearer #{bearer_token}"
+                    }
+                end
+            
+                get(profile_url, headers: oauth2_headers)
                 assert_response_status(200)
 
                 request.response_body.each_line do |json_body|                            
