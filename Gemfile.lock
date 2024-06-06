@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    uds_plus_test_kit (1.0.8)
+    uds_plus_test_kit (1.1.0)
       inferno_core (~> 0.4.37)
 
 GEM
@@ -86,6 +86,9 @@ GEM
     faraday_middleware (1.2.0)
       faraday (~> 1.0)
     ffi (1.17.0)
+    ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0-x86_64-linux)
     fhir_client (5.0.3)
       activesupport (>= 3)
       addressable (>= 2.3)
