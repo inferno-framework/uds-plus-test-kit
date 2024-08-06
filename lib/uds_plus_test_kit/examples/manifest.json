@@ -138,6 +138,176 @@
       "part": [
         {
           "name": "type",
+          "valueCode": "AdverseEvent"
+        },
+        {
+          "name": "url",
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/adverse_event"
+        },
+        {
+          "name": "expirationTime",
+          "valueDateTime": "2022-12-14T07:15:07-08:00"
+        }
+      ]
+    },
+    {
+      "name": "udsData",
+      "part": [
+        {
+          "name": "type",
+          "valueCode": "AllergyIntollerance"
+        },
+        {
+          "name": "url",
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/allergy_intollerance"
+        },
+        {
+          "name": "expirationTime",
+          "valueDateTime": "2022-12-14T07:15:07-08:00"
+        }
+      ]
+    },
+    {
+      "name": "udsData",
+      "part": [
+        {
+          "name": "type",
+          "valueCode": "Coverage"
+        },
+        {
+          "name": "url",
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/coverage"
+        },
+        {
+          "name": "expirationTime",
+          "valueDateTime": "2022-12-14T07:15:07-08:00"
+        }
+      ]
+    },
+    {
+      "name": "udsData",
+      "part": [
+        {
+          "name": "type",
+          "valueCode": "Immunization"
+        },
+        {
+          "name": "url",
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/immunization"
+        },
+        {
+          "name": "expirationTime",
+          "valueDateTime": "2022-12-14T07:15:07-08:00"
+        }
+      ]
+    },
+    {
+      "name": "udsData",
+      "part": [
+        {
+          "name": "type",
+          "valueCode": "MedicationRequest"
+        },
+        {
+          "name": "url",
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/medication_request"
+        },
+        {
+          "name": "expirationTime",
+          "valueDateTime": "2022-12-14T07:15:07-08:00"
+        }
+      ]
+    },
+    {
+      "name": "udsData",
+      "part": [
+        {
+          "name": "type",
+          "valueCode": "MedicationStatement"
+        },
+        {
+          "name": "url",
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/medication_statement"
+        },
+        {
+          "name": "expirationTime",
+          "valueDateTime": "2022-12-14T07:15:07-08:00"
+        }
+      ]
+    },
+    {
+      "name": "udsData",
+      "part": [
+        {
+          "name": "type",
+          "valueCode": "Procedure"
+        },
+        {
+          "name": "url",
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/procedure"
+        },
+        {
+          "name": "expirationTime",
+          "valueDateTime": "2022-12-14T07:15:07-08:00"
+        }
+      ]
+    },
+    {
+      "name": "udsData",
+      "part": [
+        {
+          "name": "type",
+          "valueCode": "RelatedPerson"
+        },
+        {
+          "name": "url",
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/related_person"
+        },
+        {
+          "name": "expirationTime",
+          "valueDateTime": "2022-12-14T07:15:07-08:00"
+        }
+      ]
+    },
+    {
+      "name": "udsData",
+      "part": [
+        {
+          "name": "type",
+          "valueCode": "Parameters"
+        },
+        {
+          "name": "url",
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/reporting_parameters"
+        },
+        {
+          "name": "expirationTime",
+          "valueDateTime": "2022-12-14T07:15:07-08:00"
+        }
+      ]
+    },
+    {
+      "name": "udsData",
+      "part": [
+        {
+          "name": "type",
+          "valueCode": "ServiceRequest"
+        },
+        {
+          "name": "url",
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/service_request"
+        },
+        {
+          "name": "expirationTime",
+          "valueDateTime": "2022-12-14T07:15:07-08:00"
+        }
+      ]
+    },
+    {
+      "name": "udsData",
+      "part": [
+        {
+          "name": "type",
           "valueCode": "Encounter"
         },
         {
