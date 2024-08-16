@@ -29,7 +29,7 @@ module UDSPlusTestKit
                                         not exist in this resource, or its contents do not point to a valid
                                         location for type Observation. **NOTE:**
                                         If this error occurs, it can trigger a fail for all observation-type tests, 
-                                        regardless of whether both tests were meant to run.)
+                                        regardless of whether all such tests were meant to run.)
 
             data_to_test.each do |resource|
                 # All these assertions are to differentiate Observation data between orientation types.
@@ -49,7 +49,7 @@ module UDSPlusTestKit
                 type_identifier = type_identifier.first
                 assert type_identifier.is_a?(String), identifier_fail_message
                 
-                known_observations = ["income", "sexual-orientation", "-lab-", "clinical-result"]
+                known_observations = ["income", "sexual-orientation", "-lab-", "clinical-result", "uds-plus-observation"]
                 is_known_observation = false
                 known_observations.each do |cur|
                     is_known_observation = (is_known_observation || type_identifier.include?(cur))
