@@ -155,7 +155,7 @@
       "part": [
         {
           "name": "type",
-          "valueCode": "AllergyIntollerance"
+          "valueCode": "AllergyIntolerance"
         },
         {
           "name": "url",
@@ -313,6 +313,40 @@
         {
           "name": "url",
           "valueUrl": "http://localhost:4567/custom/uds_plus/examples/encounter"
+        },
+        {
+          "name": "expirationTime",
+          "valueDateTime": "2022-12-14T07:15:07-08:00"
+        }
+      ]
+    },
+    {
+      "name": "udsData",
+      "part": [
+        {
+          "name": "type",
+          "valueCode": "Parameters"
+        },
+        {
+          "name": "url",
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/data_urls"
+        },
+        {
+          "name": "expirationTime",
+          "valueDateTime": "2022-12-14T07:15:07-08:00"
+        }
+      ]
+    },
+    {
+      "name": "udsData",
+      "part": [
+        {
+          "name": "type",
+          "valueCode": "Location"
+        },
+        {
+          "name": "url",
+          "valueUrl": "http://localhost:4567/custom/uds_plus/examples/location"
         },
         {
           "name": "expirationTime",
