@@ -108,6 +108,14 @@ module UDSPlusTestKit
         service_request_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [service_request_ex]] }
         route(:get, "/examples/service_request", service_request_ex_route_handler)
 
+        data_urls_ex = File.read(File.join(__dir__, 'examples/data_urls.ndjson'))
+        data_urls_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [data_urls_ex]] }
+        route(:get, "/examples/data_urls", data_urls_ex_route_handler)
+
+        location_ex = File.read(File.join(__dir__, 'examples/location.ndjson'))
+        location_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [location_ex]] }
+        route(:get, "/examples/location", location_ex_route_handler)
+
         # Receive Manifest via POST set-up
         resume_test_route :post, '/postHere' do |request|
             request.query_parameters["id"]

@@ -2,7 +2,7 @@ require 'json'
 require_relative './version'
 
 module UDSPlusTestKit
-    class ValidateLabTest < Inferno::Test
+    class ValidateObservationTest < Inferno::Test
         id :uds_plus_validate_observation_test
         title 'Validate UDS+ Observation Data'
         description %(

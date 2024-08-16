@@ -1,7 +1,7 @@
 require 'json'
 
 module UDSPlusTestKit
-    class ReadLabTest < Inferno::Test
+    class ReadObservationTest < Inferno::Test
         id :uds_plus_read_observation_test
         title 'Receive UDS+ Observation Data'
         description %(
