@@ -29,18 +29,18 @@ module UDSPlusTestKit
         end
 
         run do
-            omit_if !lab_data.present?, "No data provided; skipping test."
+            omit_if !observation_data.present?, "No data provided; skipping test."
 
             # if the input is a url, else it is a json
-            if lab_data.strip[0] != '{'
-                assert_valid_http_uri(lab_data, "Location provided is not a valid http uri.")
-                get lab_data
+            if observation_data.strip[0] != '{'
+                assert_valid_http_uri(observation_data, "Location provided is not a valid http uri.")
+                get observation_data
                 assert_response_status(200)
                 assert_valid_json(request.response_body, "Data received from request is not a valid JSON")
                 data = request.response_body
             else
-                assert_valid_json(lab_data, "JSON inputted was not in a valid format")
-                data = lab_data
+                assert_valid_json(observation_data, "JSON inputted was not in a valid format")
+                data = observation_data
             end
             
             resource = FHIR::Json.from_json(data)
