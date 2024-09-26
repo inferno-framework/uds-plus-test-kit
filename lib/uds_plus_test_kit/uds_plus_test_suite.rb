@@ -9,7 +9,7 @@ module UDSPlusTestKit
         title 'UDS+ Test Kit'
         description %(
             The UDS+ Test Kit tests systems for their conformance to the [UDS+
-            Implementation Guide v1.0.2](https://build.fhir.org/ig/drajer-health/uds-plus/branches/master/index.html).
+            Implementation Guide v1.1.0](https://fhir.org/guides/hrsa/uds-plus/index.html).
             The included tests function as a rudimentary data receiver. This receiver will 
             take a provided Import Manifest, either as an HTTP location or as a raw json,
             and validate its contents. This includes validating the structure of the manifest,
@@ -20,7 +20,7 @@ module UDSPlusTestKit
 
         fhir_resource_validator do
             # The home-lab-report contains validation tools for certain codes missing in the UDS+ package
-            igs('hl7.fhir.us.home-lab-report#1.0.0', 'igs/uds-plus-package-102.tgz')
+            igs('fhir.hrsa.uds-plus#1.1.0', 'hl7.fhir.us.home-lab-report#1.0.0')
 
             # Messages will be excluded if the block evaluates to a truthy value
             exclude_message do |message|
@@ -131,8 +131,8 @@ module UDSPlusTestKit
               url: 'https://github.com/inferno-framework/uds-plus-test-kit/'
             },
             {
-              label: 'UDS+ Implementation Guide v1.0.2',
-              url: 'https://build.fhir.org/ig/drajer-health/uds-plus/branches/master/index.html'
+              label: 'UDS+ Implementation Guide v1.1.0',
+              url: 'https://fhir.org/guides/hrsa/uds-plus/index.html'
             }
           ]
 

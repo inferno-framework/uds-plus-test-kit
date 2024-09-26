@@ -12,8 +12,7 @@
 
 ## Version
 **Test Kit:** 1.0.8
-**IG:** 1.0.2
+**IG:** 1.1.0
 
 ### Notes From the Developers
 - There are known issues with validating certain codesets (not resource structure) when running this kit locally. If you are running locally and encounter an "Unknown Code" error for a given resource, try running that same resource on the hosted version of the kit and see if the codeset can be validated there.
-- The validator service takes significant time to assemble once a user begins running the Test Kit locally. As of v1.0.8 of the Inferno Test Kit, please wait up to 45 mins before running any tests to allow this process to complete.
