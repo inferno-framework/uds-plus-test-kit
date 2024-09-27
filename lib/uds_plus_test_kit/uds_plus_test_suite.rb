@@ -9,7 +9,7 @@ module UDSPlusTestKit
         title 'UDS+ Test Kit'
         description %(
             The UDS+ Test Kit tests systems for their conformance to the [UDS+
-            Implementation Guide v1.0.1](https://fhir.org/guides/hrsa/uds-plus/).
+            Implementation Guide v1.1.0](https://fhir.org/guides/hrsa/uds-plus/index.html).
             The included tests function as a rudimentary data receiver. This receiver will 
             take a provided Import Manifest, either as an HTTP location or as a raw json,
             and validate its contents. This includes validating the structure of the manifest,
@@ -20,7 +20,7 @@ module UDSPlusTestKit
 
         fhir_resource_validator do
             # The home-lab-report contains validation tools for certain codes missing in the UDS+ package
-            igs('fhir.hrsa.uds-plus#1.0.1', 'hl7.fhir.us.home-lab-report#1.0.0')
+            igs('fhir.hrsa.uds-plus#1.1.0', 'hl7.fhir.us.home-lab-report#1.0.0')
 
             # Messages will be excluded if the block evaluates to a truthy value
             exclude_message do |message|
@@ -68,6 +68,54 @@ module UDSPlusTestKit
         observation_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [observation_ex]] }
         route(:get, "/examples/observation", observation_ex_route_handler)
 
+        adverse_event_ex = File.read(File.join(__dir__, 'examples/adverse_event.ndjson'))
+        adverse_event_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [adverse_event_ex]] }
+        route(:get, "/examples/adverse_event", adverse_event_ex_route_handler)
+
+        allergy_intollerance_ex = File.read(File.join(__dir__, 'examples/allergy_intollerance.ndjson'))
+        allergy_intollerance_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [allergy_intollerance_ex]] }
+        route(:get, "/examples/allergy_intollerance", allergy_intollerance_ex_route_handler)
+
+        coverage_ex = File.read(File.join(__dir__, 'examples/coverage.ndjson'))
+        coverage_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [coverage_ex]] }
+        route(:get, "/examples/coverage", coverage_ex_route_handler)
+
+        immunization_ex = File.read(File.join(__dir__, 'examples/immunization.ndjson'))
+        immunization_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [immunization_ex]] }
+        route(:get, "/examples/immunization", immunization_ex_route_handler)
+
+        medication_request_ex = File.read(File.join(__dir__, 'examples/medication_request.ndjson'))
+        medication_request_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [medication_request_ex]] }
+        route(:get, "/examples/medication_request", medication_request_ex_route_handler)
+
+        medication_statement_ex = File.read(File.join(__dir__, 'examples/medication_statement.ndjson'))
+        medication_statement_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [medication_statement_ex]] }
+        route(:get, "/examples/medication_statement", medication_statement_ex_route_handler)
+
+        procedure_ex = File.read(File.join(__dir__, 'examples/procedure.ndjson'))
+        procedure_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [procedure_ex]] }
+        route(:get, "/examples/procedure", procedure_ex_route_handler)
+
+        related_person_ex = File.read(File.join(__dir__, 'examples/related_person.ndjson'))
+        related_person_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [related_person_ex]] }
+        route(:get, "/examples/related_person", related_person_ex_route_handler)
+
+        reporting_parameters_ex = File.read(File.join(__dir__, 'examples/reporting_parameters.ndjson'))
+        reporting_parameters_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [reporting_parameters_ex]] }
+        route(:get, "/examples/reporting_parameters", reporting_parameters_ex_route_handler)
+
+        service_request_ex = File.read(File.join(__dir__, 'examples/service_request.ndjson'))
+        service_request_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [service_request_ex]] }
+        route(:get, "/examples/service_request", service_request_ex_route_handler)
+
+        data_urls_ex = File.read(File.join(__dir__, 'examples/data_urls.ndjson'))
+        data_urls_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [data_urls_ex]] }
+        route(:get, "/examples/data_urls", data_urls_ex_route_handler)
+
+        location_ex = File.read(File.join(__dir__, 'examples/location.ndjson'))
+        location_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [location_ex]] }
+        route(:get, "/examples/location", location_ex_route_handler)
+
         # Receive Manifest via POST set-up
         resume_test_route :post, '/postHere' do |request|
             request.query_parameters["id"]
@@ -83,8 +131,8 @@ module UDSPlusTestKit
               url: 'https://github.com/inferno-framework/uds-plus-test-kit/'
             },
             {
-              label: 'UDS+ Implementation Guide v1.0.1',
-              url: 'https://fhir.org/guides/hrsa/uds-plus/'
+              label: 'UDS+ Implementation Guide v1.1.0',
+              url: 'https://fhir.org/guides/hrsa/uds-plus/index.html'
             }
           ]
 

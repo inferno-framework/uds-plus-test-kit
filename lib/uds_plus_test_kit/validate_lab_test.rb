@@ -31,11 +31,11 @@ module UDSPlusTestKit
                                         not exist in this resource, or its contents do not point to a valid
                                         location for type Observation. **NOTE:**
                                         If this error occurs, it can trigger a fail for all observation-type tests, 
-                                        regardless of whether both tests were meant to run.)
+                                        regardless of whether all such tests were meant to run.)
 
             data_to_test.each do |resource|
-                # All these assertions are to differentiate Observation data between Income Data and Sexual Orientation data.
-                # A resource is skipped if it is a sexual orientation resource and fails if it cannot be identified as an income resource.
+                # All these assertions are to differentiate Observation data between orientation types.
+                # A resource is skipped if it cannot be identified as lab obsevation resource.
                 type_identifier = resource.to_hash
                 assert type_identifier['meta'].present?, identifier_fail_message
 

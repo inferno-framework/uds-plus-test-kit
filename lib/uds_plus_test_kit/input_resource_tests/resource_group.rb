@@ -15,6 +15,8 @@ require_relative '../validate_procedure_test'
 require_relative '../validate_sexual_orientation_test'
 require_relative './read_manifest_ind_test'
 require_relative '../manifest_tests/validate_manifest_test'
+require_relative './read_observation_test'
+require_relative '../validate_observation_test'
 require_relative './read_special_observation_test'
 require_relative '../validate_special_observation_test'
 require_relative './read_related_person_test'
@@ -87,6 +89,8 @@ module UDSPlusTestKit
         test from: :uds_plus_validate_lab_test
         test from: :uds_plus_read_clinical_result_test
         test from: :uds_plus_validate_clinical_result_test
+        test from: :uds_plus_read_observation_test
+        test from: :uds_plus_validate_observation_test
         test from: :uds_plus_read_special_observation_test
         test from: :uds_plus_validate_special_observation_test
         test from: :uds_plus_read_medication_request_test
