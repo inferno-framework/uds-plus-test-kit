@@ -22,6 +22,10 @@ module UDSPlusTestKit
             # The home-lab-report contains validation tools for certain codes missing in the UDS+ package
             igs('fhir.hrsa.uds-plus#1.1.0', 'hl7.fhir.us.home-lab-report#1.0.0')
 
+            cli_context do
+              displayWarnings true
+            end
+
             # Messages will be excluded if the block evaluates to a truthy value
             exclude_message do |message|
                 message.message.match?(/\A\S+: \S+: URL value '.*' does not resolve/) ||
