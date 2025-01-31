@@ -1,1 +1,2 @@
+require_relative 'uds_plus_test_kit/metadata'
 require_relative 'uds_plus_test_kit/uds_plus_test_suite'
