@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    uds_plus_test_kit (1.2.0)
+    uds_plus_test_kit (1.2.1)
       inferno_core (~> 0.6.2)
 
 GEM

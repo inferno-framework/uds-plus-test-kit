@@ -11,8 +11,8 @@
 - [UDS+ Connectathon Page](https://confluence.hl7.org/pages/viewpage.action?pageId=161056877)
 
 ## Version
-**Test Kit:** 1.2.0
-**IG:** 1.1.2
+**Test Kit:** 1.2.1
+**IG:** 2.0.0
 
 ### Notes From the Developers
 - There are known issues with validating certain codesets (not resource structure) when running this kit locally. If you are running locally and encounter an "Unknown Code" error for a given resource, try running that same resource on the hosted version of the kit and see if the codeset can be validated there.
