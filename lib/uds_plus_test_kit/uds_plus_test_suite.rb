@@ -1,5 +1,4 @@
 require 'inferno/dsl/oauth_credentials'
-require_relative './version'
 require_relative './manifest_tests/uds_plus_test_group'
 require_relative './input_resource_tests/resource_group'
 require_relative './post_tests/post_group'
@@ -10,13 +9,11 @@ module UDSPlusTestKit
         description %(
             The UDS+ Test Kit tests systems for their conformance to the [UDS+
             Implementation Guide v1.1.0](https://fhir.org/guides/hrsa/uds-plus/index.html).
-            The included tests function as a rudimentary data receiver. This receiver will 
+            The included tests function as a rudimentary data receiver. This receiver will
             take a provided Import Manifest, either as an HTTP location or as a raw json,
             and validate its contents. This includes validating the structure of the manifest,
             as well as the structure of the data the manifest points to.
         )
-
-        version VERSION
 
         fhir_resource_validator do
             # The home-lab-report contains validation tools for certain codes missing in the UDS+ package
@@ -55,7 +52,7 @@ module UDSPlusTestKit
         manifest_ex = File.read(File.join(__dir__, 'examples/manifest.json'))
         manifest_ex_route_handler = proc { [200, { 'Content-Type' => 'application/json' }, [manifest_ex]] }
         route(:get, "/examples/manifest", manifest_ex_route_handler)
-        
+
         bad_condition_ex = File.read(File.join(__dir__, 'examples/invalid_condition.ndjson'))
         bad_condition_ex_route_handler = proc { [200, { 'Content-Type' => 'application/ndjson' }, [bad_condition_ex]] }
         route(:get, "/examples/invalid_condition", bad_condition_ex_route_handler)
@@ -127,21 +124,29 @@ module UDSPlusTestKit
 
         links [
             {
+              type: 'report_issue',
               label: 'Report Issue',
               url: 'https://github.com/inferno-framework/uds-plus-test-kit/issues'
             },
             {
+              type: 'source_code',
               label: 'Open Source',
               url: 'https://github.com/inferno-framework/uds-plus-test-kit/'
             },
             {
+              type: 'download',
+              label: 'Download',
+              url: 'https://github.com/inferno-framework/uds-plus-test-kit/releases/'
+            },
+            {
+              type: 'ig',
               label: 'UDS+ Implementation Guide v1.1.0',
               url: 'https://fhir.org/guides/hrsa/uds-plus/index.html'
             }
           ]
 
         group from: :uds_plus_test_group
-        group from: :uds_plus_manifest_post_group 
+        group from: :uds_plus_manifest_post_group
         group from: :uds_plus_resource_test_group
     end
 end
