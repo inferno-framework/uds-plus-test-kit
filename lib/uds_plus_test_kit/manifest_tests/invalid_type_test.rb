@@ -51,7 +51,7 @@ module UDSPlusTestKit
             )
             assert invalid_types_found.empty?, fail_message
 
-            # For 2.2.0 release of IG, all types of Observation resources have been strongly defined. Move validation step of whether all Observation
+            # For 2.0.0 release of IG, all types of Observation resources have been strongly defined. Move validation step of whether all Observation
             # resources submitted match one of the known types from the Special Observation test to here
             invalid_observations_found = []
             observation_data.each do |resource|
