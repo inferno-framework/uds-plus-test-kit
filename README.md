@@ -2,7 +2,7 @@
 - [Inferno documentation](https://inferno-framework.github.io/inferno-core/)
 - [Ruby API documentation](https://inferno-framework.github.io/inferno-core/docs)
 - [JSON API documentation](https://inferno-framework.github.io/inferno-core/api-docs)
-- [UDS+ Implementation Guide](https://fhir.org/guides/hrsa/uds-plus/)
+- [UDS+ Implementation Guide](https://fhir.org/guides/hrsa/uds-plus/STU2)
 
 ## Connectathon Links
 - [Connectathon Manager](http://conman.clinfhir.com/connectathon.html?event=con33)

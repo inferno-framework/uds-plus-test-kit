@@ -5,7 +5,7 @@ module UDSPlusTestKit
     id :uds_plus
     title 'UDS+ Test Kit'
     description <<~DESCRIPTION
-      The UDS+ Test Kit validates the conformance of a server to the [UDS+ IG v2.0.0](https://fhir.org/guides/hrsa/uds-plus/index.html). The included tests function as a rudimentary data receiver. This receiver will take a provided Import Manifest, either as an HTTP location or as a raw json, and validate its contents. This includes validating the structure of the manifest, as well as the structure of the data the manifest points to.
+      The UDS+ Test Kit validates the conformance of a server to the [UDS+ IG v2.0.0](https://fhir.org/guides/hrsa/uds-plus/STU2). The included tests function as a rudimentary data receiver. This receiver will take a provided Import Manifest, either as an HTTP location or as a raw json, and validate its contents. This includes validating the structure of the manifest, as well as the structure of the data the manifest points to.
       <!-- break -->
       This test kit is built using the [Inferno Framework](https://inferno-framework.github.io/docs/). The Inferno Framework is designed for reuse and aims to make it easier to build test kits for any FHIR-based data exchange.
 
