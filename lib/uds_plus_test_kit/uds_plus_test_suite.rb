@@ -8,7 +8,7 @@ module UDSPlusTestKit
         title 'UDS+ Test Kit'
         description %(
             The UDS+ Test Kit tests systems for their conformance to the [UDS+
-            Implementation Guide v1.1.0](https://fhir.org/guides/hrsa/uds-plus/index.html).
+            Implementation Guide v2.0.0](https://fhir.org/guides/hrsa/uds-plus/STU2).
             The included tests function as a rudimentary data receiver. This receiver will
             take a provided Import Manifest, either as an HTTP location or as a raw json,
             and validate its contents. This includes validating the structure of the manifest,
@@ -17,7 +17,7 @@ module UDSPlusTestKit
 
         fhir_resource_validator do
             # The home-lab-report contains validation tools for certain codes missing in the UDS+ package
-            igs('fhir.hrsa.uds-plus#1.1.0', 'hl7.fhir.us.home-lab-report#1.0.0')
+            igs('fhir.hrsa.uds-plus#2.0.0', 'hl7.fhir.us.home-lab-report#1.0.0')
 
             cli_context do
               displayWarnings true
@@ -140,8 +140,8 @@ module UDSPlusTestKit
             },
             {
               type: 'ig',
-              label: 'UDS+ Implementation Guide v1.1.0',
-              url: 'https://fhir.org/guides/hrsa/uds-plus/index.html'
+              label: 'UDS+ Implementation Guide v2.0.0',
+              url: 'https://fhir.org/guides/hrsa/uds-plus/STU2'
             }
           ]
 

@@ -9,9 +9,7 @@ require_relative '../validate_income_test'
 require_relative './validate_manifest_test'
 require_relative '../validate_patient_test'
 require_relative '../validate_procedure_test'
-require_relative '../validate_sexual_orientation_test'
 require_relative '../validate_observation_test'
-require_relative '../validate_special_observation_test'
 require_relative '../validate_related_person_test'
 require_relative '../validate_immunization_test'
 require_relative '../validate_lab_test'
@@ -52,11 +50,9 @@ module UDSPlusTestKit
         test from: :uds_plus_validate_allergy_intolerance_test   
         test from: :uds_plus_validate_adverse_event_test       
         test from: :uds_plus_validate_income_test
-        test from: :uds_plus_validate_sexual_orientation_test
         test from: :uds_plus_validate_lab_test
         test from: :uds_plus_validate_clinical_result_test
         test from: :uds_plus_validate_observation_test
-        test from: :uds_plus_validate_special_observation_test
         test from: :uds_plus_validate_medication_request_test
         test from: :uds_plus_validate_medication_statement_test
         test from: :uds_plus_validate_service_request_test
