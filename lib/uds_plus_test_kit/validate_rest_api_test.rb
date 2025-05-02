@@ -16,7 +16,7 @@ module UDSPlusTestKit
   end
 
     http_client do
-      url 'http://20.115.43.39:8084/udsplus-validator/'
+      url 'http://localhost:8084/udsplus-validator/'
     end
 
 
