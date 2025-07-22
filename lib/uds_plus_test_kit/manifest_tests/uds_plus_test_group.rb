@@ -22,6 +22,7 @@ require_relative '../validate_adverse_event_test'
 require_relative '../validate_clinical_result_test'
 require_relative '../validate_data_urls_test'
 require_relative '../validate_patient_reporting_parameters_test'
+require_relative '../validate_rest_api_test.rb'
 
 module UDSPlusTestKit
     class UDSPlusTestGroup < Inferno::TestGroup
@@ -59,5 +60,6 @@ module UDSPlusTestKit
         test from: :uds_plus_validate_data_urls_test
         test from: :uds_plus_validate_patient_reporting_parameters_test
         test from: :uds_plus_invalid_type_test
+        test from: :uds_plus_validate_rest_api_test
     end
 end
